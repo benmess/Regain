@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://src.regain.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://src.regain.com" xmlns:intf="http://src.regain.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://src.regain.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getStatus">
+    <complexType/>
+   </element>
+   <element name="getStatusResponse">
+    <complexType>
+     <sequence>
+      <element name="getStatusReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOperationCode">
+    <complexType/>
+   </element>
+   <element name="getOperationCodeResponse">
+    <complexType>
+     <sequence>
+      <element name="getOperationCodeReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getClientCode">
+    <complexType/>
+   </element>
+   <element name="getClientCodeResponse">
+    <complexType>
+     <sequence>
+      <element name="getClientCodeReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getError">
+    <complexType/>
+   </element>
+   <element name="getErrorResponse">
+    <complexType>
+     <sequence>
+      <element name="getErrorReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setDDDetails">
+    <complexType>
+     <sequence>
+      <element name="sDDNo" type="xsd:string"/>
+      <element name="sDDDesc" type="xsd:string"/>
+      <element name="sDDDate" type="xsd:string"/>
+      <element name="sClientCode" type="xsd:string"/>
+      <element name="iOperationCode" type="xsd:int"/>
+      <element name="bNew" type="xsd:boolean"/>
+      <element name="sError" type="xsd:string"/>
+      <element name="bStatus" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setDDDetailsResponse">
+    <complexType/>
+   </element>
+   <element name="getNew">
+    <complexType/>
+   </element>
+   <element name="getNewResponse">
+    <complexType>
+     <sequence>
+      <element name="getNewReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDDDate">
+    <complexType/>
+   </element>
+   <element name="getDDDateResponse">
+    <complexType>
+     <sequence>
+      <element name="getDDDateReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDDNo">
+    <complexType/>
+   </element>
+   <element name="getDDNoResponse">
+    <complexType>
+     <sequence>
+      <element name="getDDNoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDDDesc">
+    <complexType/>
+   </element>
+   <element name="getDDDescResponse">
+    <complexType>
+     <sequence>
+      <element name="getDDDescReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getDDDateRequest">
+
+      <wsdl:part element="impl:getDDDate" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDDDescRequest">
+
+      <wsdl:part element="impl:getDDDesc" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationCodeResponse">
+
+      <wsdl:part element="impl:getOperationCodeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationCodeRequest">
+
+      <wsdl:part element="impl:getOperationCode" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDDDateResponse">
+
+      <wsdl:part element="impl:getDDDateResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getErrorRequest">
+
+      <wsdl:part element="impl:getError" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDDDescResponse">
+
+      <wsdl:part element="impl:getDDDescResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getStatusRequest">
+
+      <wsdl:part element="impl:getStatus" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getStatusResponse">
+
+      <wsdl:part element="impl:getStatusResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDDNoRequest">
+
+      <wsdl:part element="impl:getDDNo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNewRequest">
+
+      <wsdl:part element="impl:getNew" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getClientCodeResponse">
+
+      <wsdl:part element="impl:getClientCodeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNewResponse">
+
+      <wsdl:part element="impl:getNewResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setDDDetailsRequest">
+
+      <wsdl:part element="impl:setDDDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setDDDetailsResponse">
+
+      <wsdl:part element="impl:setDDDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getErrorResponse">
+
+      <wsdl:part element="impl:getErrorResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDDNoResponse">
+
+      <wsdl:part element="impl:getDDNoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getClientCodeRequest">
+
+      <wsdl:part element="impl:getClientCode" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WBSReturnDispatchDocket">
+
+      <wsdl:operation name="getStatus">
+
+         <wsdl:input message="impl:getStatusRequest" name="getStatusRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getStatusResponse" name="getStatusResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationCode">
+
+         <wsdl:input message="impl:getOperationCodeRequest" name="getOperationCodeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getOperationCodeResponse" name="getOperationCodeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getClientCode">
+
+         <wsdl:input message="impl:getClientCodeRequest" name="getClientCodeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getClientCodeResponse" name="getClientCodeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getError">
+
+         <wsdl:input message="impl:getErrorRequest" name="getErrorRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getErrorResponse" name="getErrorResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDDDetails">
+
+         <wsdl:input message="impl:setDDDetailsRequest" name="setDDDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setDDDetailsResponse" name="setDDDetailsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNew">
+
+         <wsdl:input message="impl:getNewRequest" name="getNewRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getNewResponse" name="getNewResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDDDate">
+
+         <wsdl:input message="impl:getDDDateRequest" name="getDDDateRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDDDateResponse" name="getDDDateResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDDNo">
+
+         <wsdl:input message="impl:getDDNoRequest" name="getDDNoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDDNoResponse" name="getDDNoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDDDesc">
+
+         <wsdl:input message="impl:getDDDescRequest" name="getDDDescRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDDDescResponse" name="getDDDescResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WBSReturnDispatchDocketSoapBinding" type="impl:WBSReturnDispatchDocket">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationCode">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getOperationCodeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOperationCodeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getClientCode">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getClientCodeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getClientCodeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getError">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getErrorRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getErrorResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDDDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setDDDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setDDDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNew">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNewRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNewResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDDDate">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDDDateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDDDateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDDNo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDDNoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDDNoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDDDesc">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDDDescRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDDDescResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WBSReturnDispatchDocketService">
+
+      <wsdl:port binding="impl:WBSReturnDispatchDocketSoapBinding" name="WBSReturnDispatchDocket">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WBSReturnDispatchDocket"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://servlets.fronesis.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://servlets.fronesis.com" xmlns:intf="http://servlets.fronesis.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://servlets.fronesis.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="setRoleInfo">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sRoleDescription" type="xsd:string"/>
+      <element name="sRoleLongDescription" type="xsd:string"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setRoleInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="setRoleInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteUser">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDeleteUser" type="xsd:string"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteUserResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteUserReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUserRoles">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sSelectedUser" type="xsd:string"/>
+      <element name="bFull" type="xsd:boolean"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUserRolesResponse">
+    <complexType>
+     <sequence>
+      <element name="getUserRolesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getRoleUsers">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="iSelectRole" type="xsd:int"/>
+      <element name="bFull" type="xsd:boolean"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getRoleUsersResponse">
+    <complexType>
+     <sequence>
+      <element name="getRoleUsersReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setRoleUserInfo">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sSaveString" type="xsd:string"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setRoleUserInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="setRoleUserInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUserRoleInfo">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sSaveString" type="xsd:string"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUserRoleInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="setUserRoleInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteRoleInfo">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="iRoleId" type="xsd:int"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteRoleInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteRoleInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkpassword">
+    <complexType>
+     <sequence>
+      <element name="sUser" type="xsd:string"/>
+      <element name="sPassword" type="xsd:string"/>
+      <element name="iWebAppId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkpasswordResponse">
+    <complexType>
+     <sequence>
+      <element name="checkpasswordReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllUsersAndRoleInfo">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllUsersAndRoleInfoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllUsersAndRoleInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addUser">
+    <complexType>
+     <sequence>
+      <element name="sUser" type="xsd:string"/>
+      <element name="sPassword" type="xsd:string"/>
+      <element name="sEmail" type="xsd:string"/>
+      <element name="sWebAppId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addUserResponse">
+    <complexType>
+     <sequence>
+      <element name="addUserReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getRoleUsersResponse">
+
+      <wsdl:part element="impl:getRoleUsersResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUserRoleInfoRequest">
+
+      <wsdl:part element="impl:setUserRoleInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUsersAndRoleInfoResponse">
+
+      <wsdl:part element="impl:getAllUsersAndRoleInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setRoleInfoRequest">
+
+      <wsdl:part element="impl:setRoleInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserRequest">
+
+      <wsdl:part element="impl:deleteUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUserRequest">
+
+      <wsdl:part element="impl:addUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkpasswordRequest">
+
+      <wsdl:part element="impl:checkpassword" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserResponse">
+
+      <wsdl:part element="impl:deleteUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRoleUsersRequest">
+
+      <wsdl:part element="impl:getRoleUsers" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserRolesResponse">
+
+      <wsdl:part element="impl:getUserRolesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUserRoleInfoResponse">
+
+      <wsdl:part element="impl:setUserRoleInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setRoleInfoResponse">
+
+      <wsdl:part element="impl:setRoleInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setRoleUserInfoRequest">
+
+      <wsdl:part element="impl:setRoleUserInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUsersAndRoleInfoRequest">
+
+      <wsdl:part element="impl:getAllUsersAndRoleInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkpasswordResponse">
+
+      <wsdl:part element="impl:checkpasswordResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setRoleUserInfoResponse">
+
+      <wsdl:part element="impl:setRoleUserInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserRolesRequest">
+
+      <wsdl:part element="impl:getUserRoles" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteRoleInfoRequest">
+
+      <wsdl:part element="impl:deleteRoleInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUserResponse">
+
+      <wsdl:part element="impl:addUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteRoleInfoResponse">
+
+      <wsdl:part element="impl:deleteRoleInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WbsAdmin">
+
+      <wsdl:operation name="setRoleInfo">
+
+         <wsdl:input message="impl:setRoleInfoRequest" name="setRoleInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setRoleInfoResponse" name="setRoleInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUser">
+
+         <wsdl:input message="impl:deleteUserRequest" name="deleteUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteUserResponse" name="deleteUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUserRoles">
+
+         <wsdl:input message="impl:getUserRolesRequest" name="getUserRolesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUserRolesResponse" name="getUserRolesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRoleUsers">
+
+         <wsdl:input message="impl:getRoleUsersRequest" name="getRoleUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getRoleUsersResponse" name="getRoleUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setRoleUserInfo">
+
+         <wsdl:input message="impl:setRoleUserInfoRequest" name="setRoleUserInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setRoleUserInfoResponse" name="setRoleUserInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUserRoleInfo">
+
+         <wsdl:input message="impl:setUserRoleInfoRequest" name="setUserRoleInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setUserRoleInfoResponse" name="setUserRoleInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteRoleInfo">
+
+         <wsdl:input message="impl:deleteRoleInfoRequest" name="deleteRoleInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteRoleInfoResponse" name="deleteRoleInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkpassword">
+
+         <wsdl:input message="impl:checkpasswordRequest" name="checkpasswordRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:checkpasswordResponse" name="checkpasswordResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUsersAndRoleInfo">
+
+         <wsdl:input message="impl:getAllUsersAndRoleInfoRequest" name="getAllUsersAndRoleInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllUsersAndRoleInfoResponse" name="getAllUsersAndRoleInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addUser">
+
+         <wsdl:input message="impl:addUserRequest" name="addUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addUserResponse" name="addUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WbsAdminSoapBinding" type="impl:WbsAdmin">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="setRoleInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setRoleInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setRoleInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUserRoles">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUserRolesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUserRolesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRoleUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRoleUsersRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRoleUsersResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setRoleUserInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setRoleUserInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setRoleUserInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUserRoleInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setUserRoleInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setUserRoleInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteRoleInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteRoleInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteRoleInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkpassword">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkpasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkpasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUsersAndRoleInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllUsersAndRoleInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllUsersAndRoleInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WbsAdminService">
+
+      <wsdl:port binding="impl:WbsAdminSoapBinding" name="WbsAdmin">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WbsAdmin"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

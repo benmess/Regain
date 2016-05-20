@@ -1,0 +1,6 @@
+Environment=DEVWCREGAIN
+DeploymentPath=C:\WebRoot\Regain
+DevDeploymentPath=C:\Development\Regain\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\Regain
+Logging=0
+DevServerIISWCFServer=http://localhost:17902/Service1.svc
+IISWCFServer=http://vsrs11:8088/Service1.svc

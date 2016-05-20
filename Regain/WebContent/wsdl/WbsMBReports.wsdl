@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://src.regain.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://src.regain.com" xmlns:intf="http://src.regain.com" xmlns:tns1="http://servlets.fronesis.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://src.regain.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://servlets.fronesis.com"/>
+   <element name="get_Report_pdf">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="iReport" type="xsd:int"/>
+      <element name="iMBOperationCodeStart" type="xsd:int"/>
+      <element name="iMBOperationCodeEnd" type="xsd:int"/>
+      <element name="sMBAccountTypeCodeStart" type="xsd:string"/>
+      <element name="sMBAccountTypeCodeEnd" type="xsd:string"/>
+      <element name="sMBAccountCodeStart" type="xsd:string"/>
+      <element name="sMBAccountCodeEnd" type="xsd:string"/>
+      <element name="iDDOperationCodeStart" type="xsd:int"/>
+      <element name="iDDOperationCodeEnd" type="xsd:int"/>
+      <element name="sDDDateStart" type="xsd:string"/>
+      <element name="sDDDateEnd" type="xsd:string"/>
+      <element name="sDDNumberStart" type="xsd:string"/>
+      <element name="sDDNumberEnd" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_Report_pdfResponse">
+    <complexType>
+     <sequence>
+      <element name="get_Report_pdfReturn" type="tns1:WBSReturnWithExtra"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getReportTypes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getReportTypesResponse">
+    <complexType>
+     <sequence>
+      <element name="getReportTypesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://servlets.fronesis.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="WBSReturnWithExtra">
+    <sequence>
+     <element name="filename" nillable="true" type="xsd:string"/>
+     <element name="gridcols" type="xsd:int"/>
+     <element name="gridrows" type="xsd:int"/>
+     <element name="gridstring" nillable="true" type="xsd:string"/>
+     <element name="reporttype" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="WBSReturn">
+    <sequence>
+     <element name="gridcols" type="xsd:int"/>
+     <element name="gridrows" type="xsd:int"/>
+     <element name="gridstring" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getReportTypesResponse">
+
+      <wsdl:part element="impl:getReportTypesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_Report_pdfResponse">
+
+      <wsdl:part element="impl:get_Report_pdfResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_Report_pdfRequest">
+
+      <wsdl:part element="impl:get_Report_pdf" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getReportTypesRequest">
+
+      <wsdl:part element="impl:getReportTypes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WbsMBReports">
+
+      <wsdl:operation name="get_Report_pdf">
+
+         <wsdl:input message="impl:get_Report_pdfRequest" name="get_Report_pdfRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:get_Report_pdfResponse" name="get_Report_pdfResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getReportTypes">
+
+         <wsdl:input message="impl:getReportTypesRequest" name="getReportTypesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getReportTypesResponse" name="getReportTypesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WbsMBReportsSoapBinding" type="impl:WbsMBReports">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="get_Report_pdf">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="get_Report_pdfRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="get_Report_pdfResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getReportTypes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getReportTypesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getReportTypesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WbsMBReportsService">
+
+      <wsdl:port binding="impl:WbsMBReportsSoapBinding" name="WbsMBReports">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WbsMBReports"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://servlets.fronesis.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://servlets.fronesis.com" xmlns:intf="http://servlets.fronesis.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://servlets.fronesis.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="get_WindchillFilesFromFuncLoc">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iWebApp" type="xsd:int"/>
+      <element name="sFuncLocCode" type="xsd:string"/>
+      <element name="bHistoric" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_WindchillFilesFromFuncLocResponse">
+    <complexType>
+     <sequence>
+      <element name="get_WindchillFilesFromFuncLocReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_Attachments">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iRelatedTableUniqueId" type="xsd:int"/>
+      <element name="iAttachmentType" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_AttachmentsResponse">
+    <complexType>
+     <sequence>
+      <element name="get_AttachmentsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="download_File">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iId" type="xsd:int"/>
+      <element name="sFilename" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="download_FileResponse">
+    <complexType>
+     <sequence>
+      <element name="download_FileReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="update_Attachment">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iId" type="xsd:int"/>
+      <element name="iRelatedTableUniqueId" type="xsd:int"/>
+      <element name="iAttachmentType" type="xsd:int"/>
+      <element name="iCounter" type="xsd:int"/>
+      <element name="sDescription" type="xsd:string"/>
+      <element name="sComments" type="xsd:string"/>
+      <element name="sFilename" type="xsd:string"/>
+      <element name="iDeleted" type="xsd:int"/>
+      <element name="iRow" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="update_AttachmentResponse">
+    <complexType>
+     <sequence>
+      <element name="update_AttachmentReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="download_WindchillFile">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iWebApp" type="xsd:int"/>
+      <element name="iId" type="xsd:int"/>
+      <element name="sFilename" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="download_WindchillFileResponse">
+    <complexType>
+     <sequence>
+      <element name="download_WindchillFileReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="search_WindchillFiles">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iWebApp" type="xsd:int"/>
+      <element name="sSearchCriteria" type="xsd:string"/>
+      <element name="bHistoric" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="search_WindchillFilesResponse">
+    <complexType>
+     <sequence>
+      <element name="search_WindchillFilesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="download_FileRequest">
+
+      <wsdl:part element="impl:download_File" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="download_WindchillFileRequest">
+
+      <wsdl:part element="impl:download_WindchillFile" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="update_AttachmentResponse">
+
+      <wsdl:part element="impl:update_AttachmentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="update_AttachmentRequest">
+
+      <wsdl:part element="impl:update_Attachment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="search_WindchillFilesResponse">
+
+      <wsdl:part element="impl:search_WindchillFilesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="search_WindchillFilesRequest">
+
+      <wsdl:part element="impl:search_WindchillFiles" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_AttachmentsRequest">
+
+      <wsdl:part element="impl:get_Attachments" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_WindchillFilesFromFuncLocRequest">
+
+      <wsdl:part element="impl:get_WindchillFilesFromFuncLoc" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_AttachmentsResponse">
+
+      <wsdl:part element="impl:get_AttachmentsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="download_FileResponse">
+
+      <wsdl:part element="impl:download_FileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="download_WindchillFileResponse">
+
+      <wsdl:part element="impl:download_WindchillFileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_WindchillFilesFromFuncLocResponse">
+
+      <wsdl:part element="impl:get_WindchillFilesFromFuncLocResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WbsFile">
+
+      <wsdl:operation name="get_WindchillFilesFromFuncLoc">
+
+         <wsdl:input message="impl:get_WindchillFilesFromFuncLocRequest" name="get_WindchillFilesFromFuncLocRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:get_WindchillFilesFromFuncLocResponse" name="get_WindchillFilesFromFuncLocResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="get_Attachments">
+
+         <wsdl:input message="impl:get_AttachmentsRequest" name="get_AttachmentsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:get_AttachmentsResponse" name="get_AttachmentsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="download_File">
+
+         <wsdl:input message="impl:download_FileRequest" name="download_FileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:download_FileResponse" name="download_FileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="update_Attachment">
+
+         <wsdl:input message="impl:update_AttachmentRequest" name="update_AttachmentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:update_AttachmentResponse" name="update_AttachmentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="download_WindchillFile">
+
+         <wsdl:input message="impl:download_WindchillFileRequest" name="download_WindchillFileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:download_WindchillFileResponse" name="download_WindchillFileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="search_WindchillFiles">
+
+         <wsdl:input message="impl:search_WindchillFilesRequest" name="search_WindchillFilesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:search_WindchillFilesResponse" name="search_WindchillFilesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WbsFileSoapBinding" type="impl:WbsFile">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="get_WindchillFilesFromFuncLoc">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="get_WindchillFilesFromFuncLocRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="get_WindchillFilesFromFuncLocResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="get_Attachments">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="get_AttachmentsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="get_AttachmentsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="download_File">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="download_FileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="download_FileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="update_Attachment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="update_AttachmentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="update_AttachmentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="download_WindchillFile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="download_WindchillFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="download_WindchillFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="search_WindchillFiles">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="search_WindchillFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="search_WindchillFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WbsFileService">
+
+      <wsdl:port binding="impl:WbsFileSoapBinding" name="WbsFile">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WbsFile"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

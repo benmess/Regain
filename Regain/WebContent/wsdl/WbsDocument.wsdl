@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://src.regain.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://src.regain.com" xmlns:intf="http://src.regain.com" xmlns:tns1="http://servlets.fronesis.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://src.regain.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://servlets.fronesis.com"/>
+   <element name="getFunctionalLocations">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sJobNo" type="xsd:string"/>
+      <element name="sDocNo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getFunctionalLocationsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getFunctionalLocationsReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSearchDocs">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sJobNo" type="xsd:string"/>
+      <element name="sDocType" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSearchDocsResponse">
+    <complexType>
+     <sequence>
+      <element name="getSearchDocsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocDetails">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDocNo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="getDocDetailsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocVerification">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDocNo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocVerificationResponse">
+    <complexType>
+     <sequence>
+      <element name="getDocVerificationReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocAttachments">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDocNo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocAttachmentsResponse">
+    <complexType>
+     <sequence>
+      <element name="getDocAttachmentsReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobAccessLevels">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobAccessLevelsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getJobAccessLevelsReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setJobAccessLevels">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sJobSaveString" type="xsd:string"/>
+      <element name="sDocTypeSaveString" type="xsd:string"/>
+      <element name="bCallFromConfirm" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setJobAccessLevelsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="setJobAccessLevelsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteWindchillAttachment">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDocNo" type="xsd:string"/>
+      <element name="iAttachmentId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteWindchillAttachmentResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteWindchillAttachmentReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocTypes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocTypesResponse">
+    <complexType>
+     <sequence>
+      <element name="getDocTypesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobCodes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sSearchCriteria" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJobCodesResponse">
+    <complexType>
+     <sequence>
+      <element name="getJobCodesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setWindchillDocument">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="bCallFromConfirm" type="xsd:boolean"/>
+      <element name="sDocDetailsString" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setWindchillDocumentResponse">
+    <complexType>
+     <sequence>
+      <element name="setWindchillDocumentReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://servlets.fronesis.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="WBSReturn">
+    <sequence>
+     <element name="gridcols" type="xsd:int"/>
+     <element name="gridrows" type="xsd:int"/>
+     <element name="gridstring" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getJobAccessLevelsRequest">
+
+      <wsdl:part element="impl:getJobAccessLevels" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocVerificationRequest">
+
+      <wsdl:part element="impl:getDocVerification" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFunctionalLocationsRequest">
+
+      <wsdl:part element="impl:getFunctionalLocations" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocAttachmentsResponse">
+
+      <wsdl:part element="impl:getDocAttachmentsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobAccessLevelsResponse">
+
+      <wsdl:part element="impl:getJobAccessLevelsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteWindchillAttachmentResponse">
+
+      <wsdl:part element="impl:deleteWindchillAttachmentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocTypesResponse">
+
+      <wsdl:part element="impl:getDocTypesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSearchDocsResponse">
+
+      <wsdl:part element="impl:getSearchDocsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocVerificationResponse">
+
+      <wsdl:part element="impl:getDocVerificationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setJobAccessLevelsRequest">
+
+      <wsdl:part element="impl:setJobAccessLevels" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setWindchillDocumentRequest">
+
+      <wsdl:part element="impl:setWindchillDocument" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteWindchillAttachmentRequest">
+
+      <wsdl:part element="impl:deleteWindchillAttachment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobCodesRequest">
+
+      <wsdl:part element="impl:getJobCodes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setWindchillDocumentResponse">
+
+      <wsdl:part element="impl:setWindchillDocumentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocTypesRequest">
+
+      <wsdl:part element="impl:getDocTypes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSearchDocsRequest">
+
+      <wsdl:part element="impl:getSearchDocs" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocDetailsResponse">
+
+      <wsdl:part element="impl:getDocDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJobCodesResponse">
+
+      <wsdl:part element="impl:getJobCodesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocDetailsRequest">
+
+      <wsdl:part element="impl:getDocDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocAttachmentsRequest">
+
+      <wsdl:part element="impl:getDocAttachments" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFunctionalLocationsResponse">
+
+      <wsdl:part element="impl:getFunctionalLocationsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setJobAccessLevelsResponse">
+
+      <wsdl:part element="impl:setJobAccessLevelsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WbsDocument">
+
+      <wsdl:operation name="getFunctionalLocations">
+
+         <wsdl:input message="impl:getFunctionalLocationsRequest" name="getFunctionalLocationsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getFunctionalLocationsResponse" name="getFunctionalLocationsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSearchDocs">
+
+         <wsdl:input message="impl:getSearchDocsRequest" name="getSearchDocsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getSearchDocsResponse" name="getSearchDocsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocDetails">
+
+         <wsdl:input message="impl:getDocDetailsRequest" name="getDocDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDocDetailsResponse" name="getDocDetailsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocVerification">
+
+         <wsdl:input message="impl:getDocVerificationRequest" name="getDocVerificationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDocVerificationResponse" name="getDocVerificationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocAttachments">
+
+         <wsdl:input message="impl:getDocAttachmentsRequest" name="getDocAttachmentsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDocAttachmentsResponse" name="getDocAttachmentsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobAccessLevels">
+
+         <wsdl:input message="impl:getJobAccessLevelsRequest" name="getJobAccessLevelsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getJobAccessLevelsResponse" name="getJobAccessLevelsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setJobAccessLevels">
+
+         <wsdl:input message="impl:setJobAccessLevelsRequest" name="setJobAccessLevelsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setJobAccessLevelsResponse" name="setJobAccessLevelsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteWindchillAttachment">
+
+         <wsdl:input message="impl:deleteWindchillAttachmentRequest" name="deleteWindchillAttachmentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteWindchillAttachmentResponse" name="deleteWindchillAttachmentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocTypes">
+
+         <wsdl:input message="impl:getDocTypesRequest" name="getDocTypesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDocTypesResponse" name="getDocTypesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobCodes">
+
+         <wsdl:input message="impl:getJobCodesRequest" name="getJobCodesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getJobCodesResponse" name="getJobCodesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setWindchillDocument">
+
+         <wsdl:input message="impl:setWindchillDocumentRequest" name="setWindchillDocumentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setWindchillDocumentResponse" name="setWindchillDocumentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WbsDocumentSoapBinding" type="impl:WbsDocument">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getFunctionalLocations">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getFunctionalLocationsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFunctionalLocationsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSearchDocs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSearchDocsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSearchDocsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDocDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDocDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocVerification">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDocVerificationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDocVerificationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocAttachments">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDocAttachmentsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDocAttachmentsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobAccessLevels">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobAccessLevelsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobAccessLevelsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setJobAccessLevels">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setJobAccessLevelsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setJobAccessLevelsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteWindchillAttachment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteWindchillAttachmentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteWindchillAttachmentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocTypes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDocTypesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDocTypesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJobCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getJobCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJobCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setWindchillDocument">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setWindchillDocumentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setWindchillDocumentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WbsDocumentService">
+
+      <wsdl:port binding="impl:WbsDocumentSoapBinding" name="WbsDocument">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WbsDocument"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

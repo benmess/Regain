@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://src.regain.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://src.regain.com" xmlns:intf="http://src.regain.com" xmlns:tns1="http://servlets.fronesis.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://src.regain.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://servlets.fronesis.com"/>
+   <element name="setReliabilityEventLock">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUsername" type="xsd:string"/>
+      <element name="iId" type="xsd:int"/>
+      <element name="iLocked" type="xsd:int"/>
+      <element name="sMenu" type="xsd:string"/>
+      <element name="sExtra" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setReliabilityEventLockResponse">
+    <complexType>
+     <sequence>
+      <element name="setReliabilityEventLockReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExistingEventCodes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExistingEventCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getExistingEventCodesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExistingActionRequestCodes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExistingActionRequestCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getExistingActionRequestCodesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_Reliability_Equipment_Codes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sFilterCode" type="xsd:string"/>
+      <element name="iOperationCode" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_Reliability_Equipment_CodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="get_Reliability_Equipment_CodesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setReliabilityEvent">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="bCallFromConfirm" type="xsd:boolean"/>
+      <element name="sSaveString" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setReliabilityEventResponse">
+    <complexType>
+     <sequence>
+      <element name="setReliabilityEventReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getActionRequest">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sARCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getActionRequestResponse">
+    <complexType>
+     <sequence>
+      <element name="getActionRequestReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setActionRequestLock">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUsername" type="xsd:string"/>
+      <element name="sARCode" type="xsd:string"/>
+      <element name="iLocked" type="xsd:int"/>
+      <element name="sMenu" type="xsd:string"/>
+      <element name="sExtra" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setActionRequestLockResponse">
+    <complexType>
+     <sequence>
+      <element name="setActionRequestLockReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNewEventCode">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="iExistingId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNewEventCodeResponse">
+    <complexType>
+     <sequence>
+      <element name="getNewEventCodeReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_Plant_Sections">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sOperation" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="get_Plant_SectionsResponse">
+    <complexType>
+     <sequence>
+      <element name="get_Plant_SectionsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOperationCodes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOperationCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getOperationCodesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getActionRequestLock">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUsername" type="xsd:string"/>
+      <element name="sARCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getActionRequestLockResponse">
+    <complexType>
+     <sequence>
+      <element name="getActionRequestLockReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setActionRequest">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="bCallFromConfirm" type="xsd:boolean"/>
+      <element name="sSaveString" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setActionRequestResponse">
+    <complexType>
+     <sequence>
+      <element name="setActionRequestReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getReliabilityEvent">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getReliabilityEventResponse">
+    <complexType>
+     <sequence>
+      <element name="getReliabilityEventReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="emailActionRequestReport">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="iOperationCode" type="xsd:int"/>
+      <element name="sStartDate" type="xsd:string"/>
+      <element name="sEndDate" type="xsd:string"/>
+      <element name="sOperationName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="emailActionRequestReportResponse">
+    <complexType>
+     <sequence>
+      <element name="emailActionRequestReportReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNewActionRequestCode">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="iExistingId" type="xsd:int"/>
+      <element name="sARExistingCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNewActionRequestCodeResponse">
+    <complexType>
+     <sequence>
+      <element name="getNewActionRequestCodeReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getReliabilityEventLock">
+    <complexType>
+     <sequence>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sUsername" type="xsd:string"/>
+      <element name="iId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getReliabilityEventLockResponse">
+    <complexType>
+     <sequence>
+      <element name="getReliabilityEventLockReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://servlets.fronesis.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="WBSReturn">
+    <sequence>
+     <element name="gridcols" type="xsd:int"/>
+     <element name="gridrows" type="xsd:int"/>
+     <element name="gridstring" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getNewEventCodeRequest">
+
+      <wsdl:part element="impl:getNewEventCode" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getActionRequestLockRequest">
+
+      <wsdl:part element="impl:getActionRequestLock" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setActionRequestRequest">
+
+      <wsdl:part element="impl:setActionRequest" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNewActionRequestCodeResponse">
+
+      <wsdl:part element="impl:getNewActionRequestCodeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExistingActionRequestCodesRequest">
+
+      <wsdl:part element="impl:getExistingActionRequestCodes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNewActionRequestCodeRequest">
+
+      <wsdl:part element="impl:getNewActionRequestCode" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getActionRequestResponse">
+
+      <wsdl:part element="impl:getActionRequestResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getReliabilityEventRequest">
+
+      <wsdl:part element="impl:getReliabilityEvent" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_Reliability_Equipment_CodesResponse">
+
+      <wsdl:part element="impl:get_Reliability_Equipment_CodesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExistingEventCodesRequest">
+
+      <wsdl:part element="impl:getExistingEventCodes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNewEventCodeResponse">
+
+      <wsdl:part element="impl:getNewEventCodeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationCodesResponse">
+
+      <wsdl:part element="impl:getOperationCodesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getActionRequestRequest">
+
+      <wsdl:part element="impl:getActionRequest" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setReliabilityEventLockResponse">
+
+      <wsdl:part element="impl:setReliabilityEventLockResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setActionRequestLockResponse">
+
+      <wsdl:part element="impl:setActionRequestLockResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setReliabilityEventRequest">
+
+      <wsdl:part element="impl:setReliabilityEvent" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setActionRequestResponse">
+
+      <wsdl:part element="impl:setActionRequestResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setReliabilityEventLockRequest">
+
+      <wsdl:part element="impl:setReliabilityEventLock" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_Plant_SectionsRequest">
+
+      <wsdl:part element="impl:get_Plant_Sections" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getActionRequestLockResponse">
+
+      <wsdl:part element="impl:getActionRequestLockResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="emailActionRequestReportRequest">
+
+      <wsdl:part element="impl:emailActionRequestReport" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setReliabilityEventResponse">
+
+      <wsdl:part element="impl:setReliabilityEventResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getReliabilityEventResponse">
+
+      <wsdl:part element="impl:getReliabilityEventResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_Reliability_Equipment_CodesRequest">
+
+      <wsdl:part element="impl:get_Reliability_Equipment_Codes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="emailActionRequestReportResponse">
+
+      <wsdl:part element="impl:emailActionRequestReportResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExistingEventCodesResponse">
+
+      <wsdl:part element="impl:getExistingEventCodesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationCodesRequest">
+
+      <wsdl:part element="impl:getOperationCodes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExistingActionRequestCodesResponse">
+
+      <wsdl:part element="impl:getExistingActionRequestCodesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getReliabilityEventLockRequest">
+
+      <wsdl:part element="impl:getReliabilityEventLock" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="get_Plant_SectionsResponse">
+
+      <wsdl:part element="impl:get_Plant_SectionsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getReliabilityEventLockResponse">
+
+      <wsdl:part element="impl:getReliabilityEventLockResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setActionRequestLockRequest">
+
+      <wsdl:part element="impl:setActionRequestLock" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WbsReliability">
+
+      <wsdl:operation name="setReliabilityEventLock">
+
+         <wsdl:input message="impl:setReliabilityEventLockRequest" name="setReliabilityEventLockRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setReliabilityEventLockResponse" name="setReliabilityEventLockResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExistingEventCodes">
+
+         <wsdl:input message="impl:getExistingEventCodesRequest" name="getExistingEventCodesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getExistingEventCodesResponse" name="getExistingEventCodesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExistingActionRequestCodes">
+
+         <wsdl:input message="impl:getExistingActionRequestCodesRequest" name="getExistingActionRequestCodesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getExistingActionRequestCodesResponse" name="getExistingActionRequestCodesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="get_Reliability_Equipment_Codes">
+
+         <wsdl:input message="impl:get_Reliability_Equipment_CodesRequest" name="get_Reliability_Equipment_CodesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:get_Reliability_Equipment_CodesResponse" name="get_Reliability_Equipment_CodesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setReliabilityEvent">
+
+         <wsdl:input message="impl:setReliabilityEventRequest" name="setReliabilityEventRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setReliabilityEventResponse" name="setReliabilityEventResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getActionRequest">
+
+         <wsdl:input message="impl:getActionRequestRequest" name="getActionRequestRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getActionRequestResponse" name="getActionRequestResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setActionRequestLock">
+
+         <wsdl:input message="impl:setActionRequestLockRequest" name="setActionRequestLockRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setActionRequestLockResponse" name="setActionRequestLockResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNewEventCode">
+
+         <wsdl:input message="impl:getNewEventCodeRequest" name="getNewEventCodeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getNewEventCodeResponse" name="getNewEventCodeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="get_Plant_Sections">
+
+         <wsdl:input message="impl:get_Plant_SectionsRequest" name="get_Plant_SectionsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:get_Plant_SectionsResponse" name="get_Plant_SectionsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationCodes">
+
+         <wsdl:input message="impl:getOperationCodesRequest" name="getOperationCodesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getOperationCodesResponse" name="getOperationCodesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getActionRequestLock">
+
+         <wsdl:input message="impl:getActionRequestLockRequest" name="getActionRequestLockRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getActionRequestLockResponse" name="getActionRequestLockResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setActionRequest">
+
+         <wsdl:input message="impl:setActionRequestRequest" name="setActionRequestRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setActionRequestResponse" name="setActionRequestResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getReliabilityEvent">
+
+         <wsdl:input message="impl:getReliabilityEventRequest" name="getReliabilityEventRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getReliabilityEventResponse" name="getReliabilityEventResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="emailActionRequestReport">
+
+         <wsdl:input message="impl:emailActionRequestReportRequest" name="emailActionRequestReportRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:emailActionRequestReportResponse" name="emailActionRequestReportResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNewActionRequestCode">
+
+         <wsdl:input message="impl:getNewActionRequestCodeRequest" name="getNewActionRequestCodeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getNewActionRequestCodeResponse" name="getNewActionRequestCodeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getReliabilityEventLock">
+
+         <wsdl:input message="impl:getReliabilityEventLockRequest" name="getReliabilityEventLockRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getReliabilityEventLockResponse" name="getReliabilityEventLockResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WbsReliabilitySoapBinding" type="impl:WbsReliability">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="setReliabilityEventLock">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setReliabilityEventLockRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setReliabilityEventLockResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExistingEventCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getExistingEventCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getExistingEventCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExistingActionRequestCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getExistingActionRequestCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getExistingActionRequestCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="get_Reliability_Equipment_Codes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="get_Reliability_Equipment_CodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="get_Reliability_Equipment_CodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setReliabilityEvent">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setReliabilityEventRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setReliabilityEventResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getActionRequest">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getActionRequestRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getActionRequestResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setActionRequestLock">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setActionRequestLockRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setActionRequestLockResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNewEventCode">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNewEventCodeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNewEventCodeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="get_Plant_Sections">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="get_Plant_SectionsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="get_Plant_SectionsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getOperationCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOperationCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getActionRequestLock">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getActionRequestLockRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getActionRequestLockResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setActionRequest">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setActionRequestRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setActionRequestResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getReliabilityEvent">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getReliabilityEventRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getReliabilityEventResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="emailActionRequestReport">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="emailActionRequestReportRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="emailActionRequestReportResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNewActionRequestCode">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNewActionRequestCodeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNewActionRequestCodeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getReliabilityEventLock">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getReliabilityEventLockRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getReliabilityEventLockResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WbsReliabilityService">
+
+      <wsdl:port binding="impl:WbsReliabilitySoapBinding" name="WbsReliability">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WbsReliability"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

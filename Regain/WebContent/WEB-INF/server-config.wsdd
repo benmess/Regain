@@ -1,0 +1,463 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Development\Regain2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Regain\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="WbsFile" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="get_WindchillFilesFromFuncLoc" qname="ns1:get_WindchillFilesFromFuncLoc" returnQName="ns1:get_WindchillFilesFromFuncLocReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:sSessionId" type="xsd:string"/>
+   <ns2:parameter qname="ns1:sUserId" type="xsd:string"/>
+   <ns2:parameter qname="ns1:iWebApp" type="xsd:int"/>
+   <ns2:parameter qname="ns1:sFuncLocCode" type="xsd:string"/>
+   <ns2:parameter qname="ns1:bHistoric" type="xsd:boolean"/>
+  </ns2:operation>
+  <ns1:operation name="get_Attachments" qname="ns2:get_Attachments" returnQName="ns2:get_AttachmentsReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns2:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns2:iRelatedTableUniqueId" type="xsd:int"/>
+   <ns1:parameter qname="ns2:iAttachmentType" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="download_File" qname="ns3:download_File" returnQName="ns3:download_FileReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns3:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns3:iId" type="xsd:int"/>
+   <ns1:parameter qname="ns3:sFilename" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="update_Attachment" qname="ns4:update_Attachment" returnQName="ns4:update_AttachmentReturn" returnType="xsd:string" soapAction="" xmlns:ns4="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns4:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns4:iId" type="xsd:int"/>
+   <ns1:parameter qname="ns4:iRelatedTableUniqueId" type="xsd:int"/>
+   <ns1:parameter qname="ns4:iAttachmentType" type="xsd:int"/>
+   <ns1:parameter qname="ns4:iCounter" type="xsd:int"/>
+   <ns1:parameter qname="ns4:sDescription" type="xsd:string"/>
+   <ns1:parameter qname="ns4:sComments" type="xsd:string"/>
+   <ns1:parameter qname="ns4:sFilename" type="xsd:string"/>
+   <ns1:parameter qname="ns4:iDeleted" type="xsd:int"/>
+   <ns1:parameter qname="ns4:iRow" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="download_WindchillFile" qname="ns5:download_WindchillFile" returnQName="ns5:download_WindchillFileReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns5:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns5:iWebApp" type="xsd:int"/>
+   <ns1:parameter qname="ns5:iId" type="xsd:int"/>
+   <ns1:parameter qname="ns5:sFilename" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="search_WindchillFiles" qname="ns6:search_WindchillFiles" returnQName="ns6:search_WindchillFilesReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns6:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns6:iWebApp" type="xsd:int"/>
+   <ns1:parameter qname="ns6:sSearchCriteria" type="xsd:string"/>
+   <ns1:parameter qname="ns6:bHistoric" type="xsd:boolean"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="download_File update_Attachment download_WindchillFile get_Attachments search_WindchillFiles get_WindchillFilesFromFuncLoc"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="WbsFile"/>
+  <ns1:parameter name="className" value="com.fronesis.servlets.WbsFile"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsFile"/>
+  <ns1:parameter name="schemaQualified" value="http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsFileService"/>
+ </ns1:service>
+ <ns1:service name="WBSReturnDispatchDocket" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getStatus" qname="ns7:getStatus" returnQName="ns7:getStatusReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getOperationCode" qname="ns8:getOperationCode" returnQName="ns8:getOperationCodeReturn" returnType="xsd:int" soapAction="" xmlns:ns8="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getClientCode" qname="ns9:getClientCode" returnQName="ns9:getClientCodeReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getError" qname="ns10:getError" returnQName="ns10:getErrorReturn" returnType="xsd:string" soapAction="" xmlns:ns10="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="setDDDetails" qname="ns11:setDDDetails" soapAction="" xmlns:ns11="http://src.regain.com">
+   <ns1:parameter qname="ns11:sDDNo" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:sDDDesc" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:sDDDate" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:sClientCode" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:iOperationCode" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:bNew" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:sError" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns11:bStatus" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getNew" qname="ns12:getNew" returnQName="ns12:getNewReturn" returnType="xsd:boolean" soapAction="" xmlns:ns12="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getDDDate" qname="ns13:getDDDate" returnQName="ns13:getDDDateReturn" returnType="xsd:string" soapAction="" xmlns:ns13="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getDDNo" qname="ns14:getDDNo" returnQName="ns14:getDDNoReturn" returnType="xsd:string" soapAction="" xmlns:ns14="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getDDDesc" qname="ns15:getDDDesc" returnQName="ns15:getDDDescReturn" returnType="xsd:string" soapAction="" xmlns:ns15="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:parameter name="allowedMethods" value="getStatus setDDDetails getError getClientCode getDDDesc getDDDate getOperationCode getDDNo getNew"/>
+  <ns1:parameter name="wsdlPortType" value="WBSReturnDispatchDocket"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://src.regain.com"/>
+  <ns1:parameter name="wsdlServicePort" value="WBSReturnDispatchDocket"/>
+  <ns1:parameter name="className" value="com.regain.src.WBSReturnDispatchDocket"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WBSReturnDispatchDocketService"/>
+ </ns1:service>
+ <ns1:service name="WbsDispatchDocket" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getMaterialTransactions" qname="ns16:getMaterialTransactions" returnQName="ns16:getMaterialTransactionsReturn" returnType="ns17:WBSReturnWithStatus" soapAction="" xmlns:ns16="http://src.regain.com" xmlns:ns17="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns16:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns16:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns16:sDDNo" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getDispatchDocketDetails" qname="ns18:getDispatchDocketDetails" returnQName="ns18:getDispatchDocketDetailsReturn" returnType="xsd:string" soapAction="" xmlns:ns18="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns18:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns18:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns18:sDDNo" type="xsd:string"/>
+   <ns1:parameter qname="ns18:bNewDD" type="xsd:boolean"/>
+  </ns1:operation>
+  <ns1:operation name="getMBAccounts" qname="ns19:getMBAccounts" returnQName="ns19:getMBAccountsReturn" returnType="ns20:WBSReturnWithStatus" soapAction="" xmlns:ns19="http://src.regain.com" xmlns:ns20="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns19:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns19:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns19:sAccountNo" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns19:sAccountDesc" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getExistingCodes" qname="ns21:getExistingCodes" returnQName="ns21:getExistingCodesReturn" returnType="ns22:WBSReturn" soapAction="" xmlns:ns21="http://src.regain.com" xmlns:ns22="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns21:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns21:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getExistingCodes getMaterialTransactions getMBAccounts getDispatchDocketDetails"/>
+  <ns1:parameter name="wsdlPortType" value="WbsDispatchDocket"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsDispatchDocket"/>
+  <ns1:parameter name="className" value="com.regain.src.WbsDispatchDocket"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsDispatchDocketService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns23:WBSReturnWithStatus" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.fronesis.servlets.WBSReturnWithStatus" xmlns:ns23="http://servlets.fronesis.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns24:WBSReturn" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.fronesis.servlets.WBSReturn" xmlns:ns24="http://servlets.fronesis.com"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="WbsMBReports" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="get_Report_pdf" qname="ns25:get_Report_pdf" returnQName="ns25:get_Report_pdfReturn" returnType="ns26:WBSReturnWithExtra" soapAction="" xmlns:ns25="http://src.regain.com" xmlns:ns26="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns25:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:iReport" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:iMBOperationCodeStart" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:iMBOperationCodeEnd" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sMBAccountTypeCodeStart" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sMBAccountTypeCodeEnd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sMBAccountCodeStart" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sMBAccountCodeEnd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:iDDOperationCodeStart" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:iDDOperationCodeEnd" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sDDDateStart" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sDDDateEnd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sDDNumberStart" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:sDDNumberEnd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getReportTypes" qname="ns27:getReportTypes" returnQName="ns27:getReportTypesReturn" returnType="ns28:WBSReturn" soapAction="" xmlns:ns27="http://src.regain.com" xmlns:ns28="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns27:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns27:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="get_Report_pdf getReportTypes"/>
+  <ns1:parameter name="wsdlPortType" value="WbsMBReports"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsMBReports"/>
+  <ns1:parameter name="className" value="com.regain.src.WbsMBReports"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsMBReportsService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns29:WBSReturnWithExtra" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.fronesis.servlets.WBSReturnWithExtra" xmlns:ns29="http://servlets.fronesis.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns30:WBSReturn" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.fronesis.servlets.WBSReturn" xmlns:ns30="http://servlets.fronesis.com"/>
+ </ns1:service>
+ <ns1:service name="WbsUser" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="update_User_Time" qname="ns31:update_User_Time" soapAction="" xmlns:ns31="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns31:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns31:sUsername" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns31:iWebAppId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="emailPassword" qname="ns32:emailPassword" returnQName="ns32:emailPasswordReturn" returnType="xsd:string" soapAction="" xmlns:ns32="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns32:sUsername" type="xsd:string"/>
+   <ns1:parameter qname="ns32:iWebAppId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="emailPassword update_User_Time"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="WbsUser"/>
+  <ns1:parameter name="className" value="com.fronesis.servlets.WbsUser"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsUser"/>
+  <ns1:parameter name="schemaQualified" value="http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsUserService"/>
+ </ns1:service>
+ <ns1:service name="WbsReliability" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="setReliabilityEventLock" qname="ns33:setReliabilityEventLock" returnQName="ns33:setReliabilityEventLockReturn" returnType="xsd:string" soapAction="" xmlns:ns33="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns33:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns33:sUsername" type="xsd:string"/>
+   <ns1:parameter qname="ns33:iId" type="xsd:int"/>
+   <ns1:parameter qname="ns33:iLocked" type="xsd:int"/>
+   <ns1:parameter qname="ns33:sMenu" type="xsd:string"/>
+   <ns1:parameter qname="ns33:sExtra" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getExistingEventCodes" qname="ns34:getExistingEventCodes" returnQName="ns34:getExistingEventCodesReturn" returnType="ns35:WBSReturn" soapAction="" xmlns:ns34="http://src.regain.com" xmlns:ns35="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns34:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns34:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getExistingActionRequestCodes" qname="ns36:getExistingActionRequestCodes" returnQName="ns36:getExistingActionRequestCodesReturn" returnType="ns37:WBSReturn" soapAction="" xmlns:ns36="http://src.regain.com" xmlns:ns37="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns36:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns36:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="get_Reliability_Equipment_Codes" qname="ns38:get_Reliability_Equipment_Codes" returnQName="ns38:get_Reliability_Equipment_CodesReturn" returnType="ns39:WBSReturn" soapAction="" xmlns:ns38="http://src.regain.com" xmlns:ns39="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns38:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns38:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns38:sFilterCode" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns38:iOperationCode" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="setReliabilityEvent" qname="ns40:setReliabilityEvent" returnQName="ns40:setReliabilityEventReturn" returnType="xsd:string" soapAction="" xmlns:ns40="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns40:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns40:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns40:bCallFromConfirm" type="xsd:boolean"/>
+   <ns1:parameter qname="ns40:sSaveString" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getActionRequest" qname="ns41:getActionRequest" returnQName="ns41:getActionRequestReturn" returnType="xsd:string" soapAction="" xmlns:ns41="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns41:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns41:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns41:sARCode" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="setActionRequestLock" qname="ns42:setActionRequestLock" returnQName="ns42:setActionRequestLockReturn" returnType="xsd:string" soapAction="" xmlns:ns42="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns42:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns42:sUsername" type="xsd:string"/>
+   <ns1:parameter qname="ns42:sARCode" type="xsd:string"/>
+   <ns1:parameter qname="ns42:iLocked" type="xsd:int"/>
+   <ns1:parameter qname="ns42:sMenu" type="xsd:string"/>
+   <ns1:parameter qname="ns42:sExtra" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getNewEventCode" qname="ns43:getNewEventCode" returnQName="ns43:getNewEventCodeReturn" returnType="xsd:string" soapAction="" xmlns:ns43="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns43:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns43:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns43:iExistingId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="get_Plant_Sections" qname="ns44:get_Plant_Sections" returnQName="ns44:get_Plant_SectionsReturn" returnType="xsd:string" soapAction="" xmlns:ns44="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns44:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns44:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns44:sOperation" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getOperationCodes" qname="ns45:getOperationCodes" returnQName="ns45:getOperationCodesReturn" returnType="ns46:WBSReturn" soapAction="" xmlns:ns45="http://src.regain.com" xmlns:ns46="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns45:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns45:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getActionRequestLock" qname="ns47:getActionRequestLock" returnQName="ns47:getActionRequestLockReturn" returnType="xsd:string" soapAction="" xmlns:ns47="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns47:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns47:sUsername" type="xsd:string"/>
+   <ns1:parameter qname="ns47:sARCode" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="setActionRequest" qname="ns48:setActionRequest" returnQName="ns48:setActionRequestReturn" returnType="xsd:string" soapAction="" xmlns:ns48="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns48:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns48:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns48:bCallFromConfirm" type="xsd:boolean"/>
+   <ns1:parameter qname="ns48:sSaveString" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getReliabilityEvent" qname="ns49:getReliabilityEvent" returnQName="ns49:getReliabilityEventReturn" returnType="xsd:string" soapAction="" xmlns:ns49="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns49:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns49:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns49:iId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="emailActionRequestReport" qname="ns50:emailActionRequestReport" returnQName="ns50:emailActionRequestReportReturn" returnType="xsd:string" soapAction="" xmlns:ns50="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns50:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns50:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns50:iOperationCode" type="xsd:int"/>
+   <ns1:parameter qname="ns50:sStartDate" type="xsd:string"/>
+   <ns1:parameter qname="ns50:sEndDate" type="xsd:string"/>
+   <ns1:parameter qname="ns50:sOperationName" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getNewActionRequestCode" qname="ns51:getNewActionRequestCode" returnQName="ns51:getNewActionRequestCodeReturn" returnType="xsd:string" soapAction="" xmlns:ns51="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns51:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns51:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns51:iExistingId" type="xsd:int"/>
+   <ns1:parameter qname="ns51:sARExistingCode" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getReliabilityEventLock" qname="ns52:getReliabilityEventLock" returnQName="ns52:getReliabilityEventLockReturn" returnType="xsd:string" soapAction="" xmlns:ns52="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns52:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns52:sUsername" type="xsd:string"/>
+   <ns1:parameter qname="ns52:iId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getExistingActionRequestCodes get_Plant_Sections setActionRequestLock setReliabilityEvent getActionRequestLock get_Reliability_Equipment_Codes getOperationCodes getExistingEventCodes getNewActionRequestCode getNewEventCode setActionRequest emailActionRequestReport setReliabilityEventLock getReliabilityEventLock getActionRequest getReliabilityEvent"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="WbsReliability"/>
+  <ns1:parameter name="className" value="com.regain.src.WbsReliability"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsReliability"/>
+  <ns1:parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsReliabilityService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns53:WBSReturn" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.fronesis.servlets.WBSReturn" xmlns:ns53="http://servlets.fronesis.com"/>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="WbsAdmin" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="setRoleInfo" qname="ns54:setRoleInfo" returnQName="ns54:setRoleInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns54="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns54:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns54:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns54:sRoleDescription" type="xsd:string"/>
+   <ns1:parameter qname="ns54:sRoleLongDescription" type="xsd:string"/>
+   <ns1:parameter qname="ns54:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="deleteUser" qname="ns55:deleteUser" returnQName="ns55:deleteUserReturn" returnType="xsd:string" soapAction="" xmlns:ns55="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns55:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns55:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns55:sDeleteUser" type="xsd:string"/>
+   <ns1:parameter qname="ns55:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getUserRoles" qname="ns56:getUserRoles" returnQName="ns56:getUserRolesReturn" returnType="xsd:string" soapAction="" xmlns:ns56="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns56:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns56:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns56:sSelectedUser" type="xsd:string"/>
+   <ns1:parameter qname="ns56:bFull" type="xsd:boolean"/>
+   <ns1:parameter qname="ns56:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getRoleUsers" qname="ns57:getRoleUsers" returnQName="ns57:getRoleUsersReturn" returnType="xsd:string" soapAction="" xmlns:ns57="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns57:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns57:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns57:iSelectRole" type="xsd:int"/>
+   <ns1:parameter qname="ns57:bFull" type="xsd:boolean"/>
+   <ns1:parameter qname="ns57:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="setRoleUserInfo" qname="ns58:setRoleUserInfo" returnQName="ns58:setRoleUserInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns58="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns58:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns58:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns58:sSaveString" type="xsd:string"/>
+   <ns1:parameter qname="ns58:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="setUserRoleInfo" qname="ns59:setUserRoleInfo" returnQName="ns59:setUserRoleInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns59="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns59:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns59:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns59:sSaveString" type="xsd:string"/>
+   <ns1:parameter qname="ns59:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="deleteRoleInfo" qname="ns60:deleteRoleInfo" returnQName="ns60:deleteRoleInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns60="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns60:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns60:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns60:iRoleId" type="xsd:int"/>
+   <ns1:parameter qname="ns60:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="checkpassword" qname="ns61:checkpassword" returnQName="ns61:checkpasswordReturn" returnType="xsd:boolean" soapAction="" xmlns:ns61="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns61:sUser" type="xsd:string"/>
+   <ns1:parameter qname="ns61:sPassword" type="xsd:string"/>
+   <ns1:parameter qname="ns61:iWebAppId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getAllUsersAndRoleInfo" qname="ns62:getAllUsersAndRoleInfo" returnQName="ns62:getAllUsersAndRoleInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns62="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns62:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns62:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns62:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="addUser" qname="ns63:addUser" returnQName="ns63:addUserReturn" returnType="xsd:string" soapAction="" xmlns:ns63="http://servlets.fronesis.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns63:sUser" type="xsd:string"/>
+   <ns1:parameter qname="ns63:sPassword" type="xsd:string"/>
+   <ns1:parameter qname="ns63:sEmail" type="xsd:string"/>
+   <ns1:parameter qname="ns63:sWebAppId" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAllUsersAndRoleInfo setRoleInfo deleteRoleInfo getRoleUsers addUser getUserRoles deleteUser setUserRoleInfo checkpassword setRoleUserInfo"/>
+  <ns1:parameter name="wsdlPortType" value="WbsAdmin"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsAdmin"/>
+  <ns1:parameter name="className" value="com.fronesis.servlets.WbsAdmin"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsAdminService"/>
+ </ns1:service>
+ <ns1:service name="WbsDocument" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getFunctionalLocations" qname="ns64:getFunctionalLocations" returnQName="ns64:getFunctionalLocationsReturn" returnType="ns65:WBSReturn" soapAction="" xmlns:ns64="http://src.regain.com" xmlns:ns65="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns64:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns64:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns64:sJobNo" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns64:sDocNo" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getSearchDocs" qname="ns66:getSearchDocs" returnQName="ns66:getSearchDocsReturn" returnType="xsd:string" soapAction="" xmlns:ns66="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns66:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns66:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns66:sJobNo" type="xsd:string"/>
+   <ns1:parameter qname="ns66:sDocType" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getDocDetails" qname="ns67:getDocDetails" returnQName="ns67:getDocDetailsReturn" returnType="xsd:string" soapAction="" xmlns:ns67="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns67:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns67:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns67:sDocNo" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getDocVerification" qname="ns68:getDocVerification" returnQName="ns68:getDocVerificationReturn" returnType="xsd:string" soapAction="" xmlns:ns68="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns68:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns68:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns68:sDocNo" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getDocAttachments" qname="ns69:getDocAttachments" returnQName="ns69:getDocAttachmentsReturn" returnType="ns70:WBSReturn" soapAction="" xmlns:ns69="http://src.regain.com" xmlns:ns70="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns69:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns69:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns69:sDocNo" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getJobAccessLevels" qname="ns71:getJobAccessLevels" returnQName="ns71:getJobAccessLevelsReturn" returnType="ns72:WBSReturn" soapAction="" xmlns:ns71="http://src.regain.com" xmlns:ns72="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns71:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns71:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="setJobAccessLevels" qname="ns73:setJobAccessLevels" returnQName="ns73:setJobAccessLevelsReturn" returnType="xsd:string" soapAction="" xmlns:ns73="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns73:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns73:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns73:sJobSaveString" type="xsd:string"/>
+   <ns1:parameter qname="ns73:sDocTypeSaveString" type="xsd:string"/>
+   <ns1:parameter qname="ns73:bCallFromConfirm" type="xsd:boolean"/>
+  </ns1:operation>
+  <ns1:operation name="deleteWindchillAttachment" qname="ns74:deleteWindchillAttachment" returnQName="ns74:deleteWindchillAttachmentReturn" returnType="xsd:string" soapAction="" xmlns:ns74="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns74:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns74:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns74:sDocNo" type="xsd:string"/>
+   <ns1:parameter qname="ns74:iAttachmentId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getDocTypes" qname="ns75:getDocTypes" returnQName="ns75:getDocTypesReturn" returnType="ns76:WBSReturn" soapAction="" xmlns:ns75="http://src.regain.com" xmlns:ns76="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns75:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns75:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getJobCodes" qname="ns77:getJobCodes" returnQName="ns77:getJobCodesReturn" returnType="ns78:WBSReturn" soapAction="" xmlns:ns77="http://src.regain.com" xmlns:ns78="http://servlets.fronesis.com">
+   <ns1:parameter qname="ns77:sUserId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns77:sSessionId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns77:sSearchCriteria" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="setWindchillDocument" qname="ns79:setWindchillDocument" returnQName="ns79:setWindchillDocumentReturn" returnType="xsd:string" soapAction="" xmlns:ns79="http://src.regain.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns79:sSessionId" type="xsd:string"/>
+   <ns1:parameter qname="ns79:sUserId" type="xsd:string"/>
+   <ns1:parameter qname="ns79:bCallFromConfirm" type="xsd:boolean"/>
+   <ns1:parameter qname="ns79:sDocDetailsString" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getFunctionalLocations getJobAccessLevels setJobAccessLevels getDocAttachments getJobCodes setWindchillDocument getDocVerification getSearchDocs deleteWindchillAttachment getDocTypes getDocDetails"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="WbsDocument"/>
+  <ns1:parameter name="className" value="com.regain.src.WbsDocument"/>
+  <ns1:parameter name="wsdlServicePort" value="WbsDocument"/>
+  <ns1:parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="WbsDocumentService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns80:WBSReturn" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.fronesis.servlets.WBSReturn" xmlns:ns80="http://servlets.fronesis.com"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

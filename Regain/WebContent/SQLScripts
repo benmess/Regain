@@ -1,0 +1,1600 @@
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentProduct]    Script Date: 15/04/2016 11:57:08 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_GetWindchillDocumentProduct] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150)
+
+
+AS
+BEGIN
+
+	select P.namecontainerInfo as ProductName
+	from [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[PDMLinkProduct] P 
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and P.idA2A2 = DM.idA3containerReference
+
+
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentPath]    Script Date: 15/04/2016 1:23:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_GetWindchillDocumentPath] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150),
+	@pvchDocumentType nvarchar(5)
+
+
+AS
+BEGIN
+
+	declare @vchPrefix nvarchar(3000)
+	declare @vchSuffix nvarchar(300)
+
+	select @vchPrefix = case when SF6.name is null then '' else SF6.name + '/' end + 
+		   case when SF5.name is null then '' else SF5.name + '/' end + 
+		   case when SF4.name is null then '' else SF4.name + '/' end + 
+		   case when SF3.name is null then '' else SF3.name + '/' end + 
+		   case when SF2.name is null then '' else SF2.name + '/' end  + 
+		   SF.name
+	from  [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF2
+	ON SF.idA3B2folderingInfo = SF2.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF3
+	ON SF2.idA3B2folderingInfo = SF3.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF4
+	ON SF3.idA3B2folderingInfo = SF4.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF5
+	ON SF4.idA3B2folderingInfo = SF5.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF6
+	ON SF5.idA3B2folderingInfo = SF6.idA2A2
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference 
+	and D.idA3B2folderingInfo = SF.idA2A2
+
+select @vchSuffix = SF2.name
+from [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF1, [wcadmin].[wcadmin].[SubFolder] SF2 
+where SF2.idA3B2folderingInfo = SF1.idA2A2
+and DM.WTDocumentNumber = @pvchDocumentNumber
+and DM.idA2A2 = D.idA3masterReference 
+and D.idA3B2folderingInfo = SF1.idA2A2
+and SF2.name like 'Technical Documents%' + @pvchDocumentType + '%'
+
+select @vchPrefix + '/' + @vchSuffix
+
+
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentPath]    Script Date: 15/04/2016 1:23:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentPath] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150),
+	@pvchDocumentType nvarchar(5)
+
+
+AS
+BEGIN
+
+	declare @vchPrefix nvarchar(3000)
+	declare @vchSuffix nvarchar(300)
+
+	select @vchPrefix = case when SF6.name is null then '' else SF6.name + '/' end + 
+		   case when SF5.name is null then '' else SF5.name + '/' end + 
+		   case when SF4.name is null then '' else SF4.name + '/' end + 
+		   case when SF3.name is null then '' else SF3.name + '/' end + 
+		   case when SF2.name is null then '' else SF2.name + '/' end  + 
+		   SF.name
+	from  [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF2
+	ON SF.idA3B2folderingInfo = SF2.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF3
+	ON SF2.idA3B2folderingInfo = SF3.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF4
+	ON SF3.idA3B2folderingInfo = SF4.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF5
+	ON SF4.idA3B2folderingInfo = SF5.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF6
+	ON SF5.idA3B2folderingInfo = SF6.idA2A2
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference 
+	and D.idA3B2folderingInfo = SF.idA2A2
+
+select @vchSuffix = SF2.name
+from [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF1, [wcadmin].[wcadmin].[SubFolder] SF2 
+where SF2.idA3B2folderingInfo = SF1.idA2A2
+and DM.WTDocumentNumber = @pvchDocumentNumber
+and DM.idA2A2 = D.idA3masterReference 
+and D.idA3B2folderingInfo = SF1.idA2A2
+and SF2.name like 'Technical Documents%' + @pvchDocumentType + '%'
+
+select @vchPrefix + '/' + @vchSuffix as FolderPath
+
+
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentAttachments]    Script Date: 18/04/2016 2:30:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentAttachments] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150)
+
+
+AS
+BEGIN
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference
+	and D.latestiterationInfo = 1
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+
+	order by 1, 2, 3, 5
+END
+
+
+go
+
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentAttachments]    Script Date: 18/04/2016 2:30:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentAttachments] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150)
+
+
+AS
+BEGIN
+
+--Create a temp table for storing the attachment info
+	If OBJECT_ID('tempdb..#tmpAttach') IS NOT NULL 
+		drop table #tmpAttach
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision, 
+		    min(D.iterationIdA2iterationInfo) as IterationOnSubmit
+		into #tmpAttach
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD
+	where DM.WTDocumentNumber = '120TD101'
+	and DM.idA2A2 = D.idA3masterReference
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+	 
+	group by DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, 
+		   isnull(AD.description,''), AD.role, D.versionIdA2versionInfo
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision, 
+		    D.iterationIdA2iterationInfo as IterationOnSubmit, D.noteiterationInfo as AttachmentComments
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD,
+	#tmpAttach T
+	where DM.WTDocumentNumber = '120TD101'
+	and DM.idA2A2 = D.idA3masterReference
+--	and D.latestiterationInfo = 1
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+	and T.Revision = D.versionIdA2versionInfo
+	and T.IterationOnSubmit = D.iterationIdA2iterationInfo
+	and T.AttachmentId = SD.idA2A2
+	order by 1, 2, 3, 5
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentAttachments]    Script Date: 18/04/2016 2:30:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentAttachments] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150)
+
+
+AS
+BEGIN
+
+--Create a temp table for storing the attachment info
+	If OBJECT_ID('tempdb..#tmpAttach') IS NOT NULL 
+		drop table #tmpAttach
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision, 
+		    min(D.iterationIdA2iterationInfo) as IterationOnSubmit
+		into #tmpAttach
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD
+	where DM.WTDocumentNumber = '120TD101'
+	and DM.idA2A2 = D.idA3masterReference
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+	 
+	group by DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, 
+		   isnull(AD.description,''), AD.role, D.versionIdA2versionInfo
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision, 
+		    D.iterationIdA2iterationInfo as IterationOnSubmit, D.noteiterationInfo as AttachmentComments
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD,
+	#tmpAttach T
+	where DM.WTDocumentNumber = '120TD101'
+	and DM.idA2A2 = D.idA3masterReference
+--	and D.latestiterationInfo = 1
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+	and T.Revision = D.versionIdA2versionInfo
+	and T.IterationOnSubmit = D.iterationIdA2iterationInfo
+	and T.AttachmentId = SD.idA2A2
+	order by 4, 2, 3, 5
+END
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentPath]    Script Date: 22/04/2016 8:39:33 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentPath] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150),
+	@pvchDocumentType nvarchar(5)
+
+
+AS
+BEGIN
+
+	declare @vchPrefix nvarchar(3000)
+	declare @vchSuffix nvarchar(300)
+
+	select @vchPrefix = case when SF6.name is null then '' else SF6.name + '/' end + 
+		   case when SF5.name is null then '' else SF5.name + '/' end + 
+		   case when SF4.name is null then '' else SF4.name + '/' end + 
+		   case when SF3.name is null then '' else SF3.name + '/' end + 
+		   case when SF2.name is null then '' else SF2.name + '/' end  + 
+		   SF.name
+	from  [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF2
+	ON SF.idA3B2folderingInfo = SF2.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF3
+	ON SF2.idA3B2folderingInfo = SF3.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF4
+	ON SF3.idA3B2folderingInfo = SF4.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF5
+	ON SF4.idA3B2folderingInfo = SF5.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF6
+	ON SF5.idA3B2folderingInfo = SF6.idA2A2
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference 
+	and D.idA3B2folderingInfo = SF.idA2A2
+
+select @vchSuffix = SF2.name
+from [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF1, [wcadmin].[wcadmin].[SubFolder] SF2 
+where SF2.idA3B2folderingInfo = SF1.idA2A2
+and DM.WTDocumentNumber = @pvchDocumentNumber
+and DM.idA2A2 = D.idA3masterReference 
+and D.idA3B2folderingInfo = SF1.idA2A2
+and SF2.name like 'Technical Documents%' + @pvchDocumentType + '%'
+
+select @vchPrefix + '/' + @vchSuffix as FolderPath
+
+
+END
+
+
+go
+
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillJobAccessUser]    Script Date: 22/04/2016 9:20:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_GetWindchillJobAccessUser] 
+	@pvchJobCode nvarchar(10),
+	@pvchUserId nvarchar(50)
+
+
+AS
+BEGIN
+	select TAL.AccessLevel as AccessLevel
+	from vwWindchillJobCodesParentChild JC
+	inner join tblUser U
+		on U.UserId > 0
+	inner join tblUserRoles UR
+		on UR.UserId = U.UserId
+	inner join  tblRoles R
+		on R.RoleId is not null and R.RoleId > 1
+	left outer join tblJobAccess JA
+		on JC.Parent = JA.JobId
+		and R.RoleId = JA.RoleId
+	inner join tblAccessLevels TAL
+		on isnull(JA.AccessLevel,0) = TAL.AccessLevel
+	where JC.Job = @pvchJobCode
+	and U.Username = @pvchUserId
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentPath]    Script Date: 22/04/2016 10:13:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentPath] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150),
+	@pvchDocumentType nvarchar(5)
+
+
+AS
+BEGIN
+	--declare @pvchDocumentNumber nvarchar(150)
+	--declare @pvchDocumentType nvarchar(5)
+	--set @pvchDocumentNumber = '215'	
+	--set @pvchDocumentType = 'TD'	
+
+	declare @vchPrefix nvarchar(3000)
+	declare @vchSuffix nvarchar(300)
+
+
+
+	select 
+	@vchPrefix = case when SF6.name is null then '' else SF6.name + '/' end + 
+		   case when SF5.name is null then '' else SF5.name + '/' end + 
+		   case when SF4.name is null then '' else SF4.name + '/' end + 
+		   case when SF3.name is null then '' else SF3.name + '/' end + 
+		   case when SF2.name is null then '' else SF2.name + '/' end  + 
+		   SF.name
+	from  [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM
+	, [wcadmin].[wcadmin].[SubFolder] SF
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF2
+	ON SF.idA3B2folderingInfo = SF2.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF3
+	ON SF2.idA3B2folderingInfo = SF3.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF4
+	ON SF3.idA3B2folderingInfo = SF4.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF5
+	ON SF4.idA3B2folderingInfo = SF5.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF6
+	ON SF5.idA3B2folderingInfo = SF6.idA2A2
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference 
+	and D.idA3B2folderingInfo = SF.idA2A2
+
+--	select @vchPrefix
+
+select @vchSuffix = SF2.name + case when SF3.name is null then '' else '/' + SF3.name end + 
+		   case when SF4.name is null then '' else '/' + SF4.name end + 
+		   case when SF5.name is null then '' else '/' + SF5.name end
+from [wcadmin].[wcadmin].WTDocument D, [wcadmin].[wcadmin].WTDocumentMaster DM, [wcadmin].[wcadmin].[SubFolder] SF1, [wcadmin].[wcadmin].[SubFolder] SF2 
+left outer join [wcadmin].[wcadmin].[SubFolder] SF3
+	ON SF3.idA3B2folderingInfo = SF2.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF4
+	ON SF4.idA3B2folderingInfo = SF3.idA2A2
+	left outer join [wcadmin].[wcadmin].[SubFolder] SF5
+	ON SF5.idA3B2folderingInfo = SF4.idA2A2
+where SF2.idA3B2folderingInfo = SF1.idA2A2
+and DM.WTDocumentNumber = @pvchDocumentNumber
+and DM.idA2A2 = D.idA3masterReference 
+and D.idA3B2folderingInfo = SF1.idA2A2
+and (SF2.name like 'Technical Documents%' + @pvchDocumentType + '%' or SF3.name like 'Technical Documents%' + @pvchDocumentType + '%')
+
+select @vchPrefix + '/' + @vchSuffix as FolderPath
+
+
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillJobAccessUser]    Script Date: 22/04/2016 9:20:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillJobAccessUser] 
+	@pvchJobCode nvarchar(10),
+	@pvchUserId nvarchar(50)
+
+
+AS
+BEGIN
+	select TAL.AccessLevel as AccessLevel
+	from vwWindchillJobCodesParentChild JC
+	inner join tblUser U
+		on U.UserId > 0
+	inner join tblUserRoles UR
+		on UR.UserId = U.UserId
+	inner join  tblRoles R
+		on R.RoleId = UR.RoleId
+	left outer join tblJobAccess JA
+		on JC.Parent = JA.JobId
+		and R.RoleId = JA.RoleId
+	inner join tblAccessLevels TAL
+		on isnull(JA.AccessLevel,0) = TAL.AccessLevel
+	where JC.Job = @pvchJobCode
+	and U.Username = @pvchUserId
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocTypeAccessUser]    Script Date: 22/04/2016 9:20:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_GetWindchillDocTypeAccessUser] 
+	@pvchDocTypeCode nvarchar(10),
+	@pvchUserId nvarchar(50)
+
+
+AS
+BEGIN
+	select TAL.AccessLevel as AccessLevel
+	from tblUser U
+	inner join tblUserRoles UR
+		on UR.UserId = U.UserId
+	inner join  tblRoles R
+		on R.RoleId = UR.RoleId
+	left outer join tblDocTypeAccess DTA
+		on R.RoleId = DTA.RoleId
+	inner join tblAccessLevels TAL
+		on isnull(DTA.AccessLevel,0) = TAL.AccessLevel
+	where DTA.DocTypeCode = @pvchDocTypeCode
+	and U.Username = @pvchUserId
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillFileSearchResults]    Script Date: 27/04/2016 3:01:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillFileSearchResults] 
+	-- Add the parameters for the stored procedure here
+	@pvchSearchCriteria nvarchar(150),
+	@pbHistoric bit,
+	@piDocumentNumberOnly int,
+	@pvchUser nvarchar(50)
+
+
+AS
+BEGIN
+
+	declare @vchSearch nvarchar(max)
+
+	if(@piDocumentNumberOnly = 1)
+	begin
+		if(@pbHistoric = 1)
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name ' +
+			'having Max(JA.AccessLevel) >= 2 and   Max(DTA.AccessLevel) >= 2 ' +
+
+			'order by 1, 2'
+		end
+		else
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name ' +
+			'having Max(JA.AccessLevel) >= 2 and   Max(DTA.AccessLevel) >= 2 ' +
+
+			'order by 1, 2'
+		end
+	end
+	else
+	begin
+		if(@pbHistoric = 1)
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName,SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.name like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.fileName like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 '
+
+			set @vchSearch = @vchSearch +
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.description like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'order by 1, 2, 3'
+		end
+		else
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' +
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.name like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.fileName like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 '
+
+			set @vchSearch = @vchSearch +
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, AD.description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.description like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'order by 1, 2, 3'
+		end
+	end
+
+	declare @vchSearch2 nvarchar(max)
+	select @vchSearch2 = @vchSearch
+--	print @vchSearch2
+	exec sp_executesql @vchSearch
+END
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillFileSearchResults]    Script Date: 27/04/2016 3:47:15 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillFileSearchResults] 
+	-- Add the parameters for the stored procedure here
+	@pvchSearchCriteria nvarchar(150),
+	@pbHistoric bit,
+	@piDocumentNumberOnly int,
+	@pvchUser nvarchar(50)
+
+
+AS
+BEGIN
+
+	declare @vchSearch nvarchar(max)
+
+	if(@piDocumentNumberOnly = 1)
+	begin
+		if(@pbHistoric = 1)
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name ' +
+			'having Max(JA.AccessLevel) >= 2 and   Max(DTA.AccessLevel) >= 2 ' +
+
+			'order by 1, 2'
+		end
+		else
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name ' +
+			'having Max(JA.AccessLevel) >= 2 and   Max(DTA.AccessLevel) >= 2 ' +
+
+			'order by 1, 2'
+		end
+	end
+	else
+	begin
+		if(@pbHistoric = 1)
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName,SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.name like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.fileName like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 '
+
+			set @vchSearch = @vchSearch +
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.description like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'order by 1, 2, 3'
+		end
+		else
+		begin
+			set @vchSearch  = 
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.WTDocumentNumber like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' +
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where DM.name like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.fileName like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 '
+
+			set @vchSearch = @vchSearch +
+			'union ' +
+			'select DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description ' +
+			'from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D, ' +
+			'wcadmin.wcadmin.HolderToContent H, ' +
+			'wcadmin.wcadmin.ApplicationData AD, ' +
+			'wcadmin.wcadmin.StreamData SD, ' +
+			'vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U, tblDocTypeAccess DTA ' +
+			'where AD.description like ''%' + @pvchSearchCriteria + '%'' COLLATE SQL_Latin1_General_CP1_CI_AS ' +
+			'and DM.idA2A2 = D.idA3masterReference ' +
+			'and D.latestiterationInfo = 1 ' +
+			'and D.statecheckoutInfo IN (''c/i'',''c/o'') ' +
+			'and D.idA2A2 = H.idA3A5 ' +
+			'and AD.idA2A2 = H.idA3B5 ' +
+			'and AD.idA3A5 = SD.idA2A2 ' + 
+			'and D.statestate not in (''OBSOLETE'' COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and PC.Job = LEFT(DM.WTDocumentNumber,3) ' +
+			'and PC.Parent = JA.JobId ' +
+			'and JA.RoleId = UR.RoleId ' +
+			'and U.UserId = UR.UserId ' +
+			'and (DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,1) COLLATE SQL_Latin1_General_CP1_CI_AS or DTA.DocTypeCode = SUBSTRING(DM.WTDocumentNumber,4,2) COLLATE SQL_Latin1_General_CP1_CI_AS) ' +
+			'and DTA.RoleId = UR.RoleId ' +
+			'and U.Username = ''' + @pvchUser + ''' ' +
+			'group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description ' +
+			'having Max(JA.AccessLevel) >= 1 and   Max(DTA.AccessLevel) >= 1 ' +
+
+			'order by 1, 2, 3'
+		end
+	end
+
+	declare @vchSearch2 nvarchar(max)
+	select @vchSearch2 = @vchSearch
+--	print @vchSearch2
+	exec sp_executesql @vchSearch
+END
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentsFromFunctionalLocation]    Script Date: 27/04/2016 3:42:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentsFromFunctionalLocation] 
+	-- Add the parameters for the stored procedure here
+	@pvchFunctionLocation nvarchar(40), 
+	@pbHistoric bit,
+	@pvchUser nvarchar(50)
+
+
+
+AS
+BEGIN
+
+	SET NOCOUNT ON
+
+	declare @vchFuncLoc nvarchar(20)
+	declare @vchFuncLoc2 nvarchar(20)
+	declare @vchFuncLoc3 nvarchar(20)
+	declare @iCounter int
+
+	set @vchFuncLoc = @pvchFunctionLocation
+	set @iCounter = 1
+
+	DECLARE @PartTable TABLE
+	(
+	  FuncLoc nvarchar(40)
+	)
+
+	DECLARE @PartTable2 TABLE
+	(
+	  FuncLoc nvarchar(40)
+	)
+
+	DECLARE @PartTable3 TABLE
+	(
+	  FuncLoc nvarchar(40)
+	)
+
+	insert into @PartTable3 (FuncLoc) values(@vchFuncLoc)
+
+
+	/****** LOOP DOWN THE STRUCTRUE *********/
+	while (@iCounter > 0)
+	begin
+		set @vchFuncLoc2 = null
+
+		insert into @PartTable2
+		select PM2.WTPartNumber
+		from wcadmin.wcadmin.WTPartMaster PM1, wcadmin.wcadmin.WTPart P1,
+		wcadmin.wcadmin.WTPartUsageLink UL,
+		wcadmin.wcadmin.WTPartMaster PM2, wcadmin.wcadmin.WTPart P2
+		where PM1.WTPartNumber in (select FuncLoc collate SQL_Latin1_General_CP1_CS_AS from @PartTable3)
+		and PM1.idA2A2 = P1.idA3masterReference
+		and P1.latestiterationInfo = 1
+		and UL.idA3A5 = P1.idA2A2
+		and UL.idA3B5 = PM2.idA2A2
+		and PM2.idA2A2 = P2.idA3masterReference
+		and P2.latestiterationInfo = 1
+
+		delete from @PartTable3
+
+		insert @PartTable3 
+		select FuncLoc
+		from @PartTable2
+
+		insert @PartTable 
+		select FuncLoc
+		from @PartTable2
+
+		delete from @PartTable2
+
+		select @iCounter = count(*) from @PartTable3
+
+--		print 'Down = ' + cast(@iCounter as nvarchar(5))
+
+	end
+
+
+	--select * from @PartTable --Remove this after testing
+
+	delete from @PartTable2
+	delete from @PartTable3
+	insert into @PartTable3 (FuncLoc) values(@vchFuncLoc)
+	set @iCounter = 1 --Reset the counter and the part to the original
+
+
+	/****** LOOP UP THE STRUCTRUE *********/
+	while (@iCounter > 0)
+	begin
+		set @vchFuncLoc2 = null
+
+		insert into @PartTable2
+		select PM1.WTPartNumber
+		from wcadmin.wcadmin.WTPartMaster PM1, wcadmin.wcadmin.WTPart P1,
+		wcadmin.wcadmin.WTPartUsageLink UL,
+		wcadmin.wcadmin.WTPartMaster PM2, wcadmin.wcadmin.WTPart P2
+		where PM2.WTPartNumber in (select FuncLoc collate SQL_Latin1_General_CP1_CS_AS from @PartTable3)
+		and PM1.idA2A2 = P1.idA3masterReference
+		and P1.latestiterationInfo = 1
+		and UL.idA3A5 = P1.idA2A2
+		and UL.idA3B5 = PM2.idA2A2
+		and PM2.idA2A2 = P2.idA3masterReference
+		and P2.latestiterationInfo = 1
+
+		delete from @PartTable3
+
+		insert @PartTable3 
+		select FuncLoc
+		from @PartTable2
+
+
+		insert @PartTable 
+		select FuncLoc
+		from @PartTable2
+
+		select TOP 1 @vchFuncLoc3 = FuncLoc
+		from @PartTable2
+
+		delete from @PartTable2
+
+		select @iCounter = count(*) from @PartTable3
+
+--		print 'Up = ' + cast(@iCounter as nvarchar(5))
+
+	end
+
+	--Remove the top level one up the tree
+	delete from @PartTable where FuncLoc = @vchFuncLoc3
+	--select distinct * from @PartTable
+	--select @vchFuncLoc3
+
+
+	/********************************************************/
+	/*		FIND ALL WTDOCUMENTS FOR ANY OF THESE PARTS		*/
+	/********************************************************/
+	
+	if(@pbHistoric = 1)
+	begin
+		select DISTINCT DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description
+		from wcadmin.wcadmin.WTPart P, wcadmin.wcadmin.WTPartMaster PM, @PartTable P2,
+		wcadmin.wcadmin.WTPartReferenceLink PRL, wcadmin.wcadmin.WTDocumentMaster DM,
+		wcadmin.wcadmin.WTDocument D, wcadmin.wcadmin.HolderToContent H,
+		wcadmin.wcadmin.ApplicationData AD, wcadmin.wcadmin.StreamData SD,
+		vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U
+		where  P.idA3masterReference = PM.idA2A2
+		and PM.WTPartNumber = P2.FuncLoc collate SQL_Latin1_General_CP1_CS_AS
+		and P.latestiterationInfo = 1
+		and PRL.idA3A5 = P.idA2A2
+		and PRL.idA3B5 = DM.idA2A2
+		and DM.idA2A2 = D.idA3masterReference
+		and D.latestiterationInfo = 1
+		and D.statecheckoutInfo IN ('c/i','c/o')
+		and D.idA2A2 = H.idA3A5
+		and H.idA3B5 = AD.idA2A2
+		and AD.idA3A5 = SD.idA2A2
+		and PC.Job = SUBSTRING(@pvchFunctionLocation,2,3)
+		and PC.Parent = JA.JobId
+		and JA.RoleId = UR.RoleId
+		and U.UserId = UR.UserId
+		and U.Username = @pvchUser
+		group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description
+		having Max(JA.AccessLevel) >= 1 
+
+		union all 
+		select DISTINCT DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description
+		from wcadmin.wcadmin.WTPart P, wcadmin.wcadmin.WTPartMaster PM, @PartTable P2,
+		wcadmin.wcadmin.WTPartDescribeLink PDL, wcadmin.wcadmin.WTDocumentMaster DM,
+		wcadmin.wcadmin.WTDocument D, wcadmin.wcadmin.HolderToContent H,
+		wcadmin.wcadmin.ApplicationData AD, wcadmin.wcadmin.StreamData SD,
+		vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U
+		where  P.idA3masterReference = PM.idA2A2
+		and PM.WTPartNumber = P2.FuncLoc collate SQL_Latin1_General_CP1_CS_AS
+		and P.latestiterationInfo = 1
+		and PDL.idA3A5 = P.idA2A2
+		and PDL.idA3B5 = D.idA2A2
+		and DM.idA2A2 = D.idA3masterReference
+		and D.latestiterationInfo = 1
+		and D.statecheckoutInfo IN ('c/i','c/o')
+		and D.idA2A2 = H.idA3A5
+		and H.idA3B5 = AD.idA2A2
+		and AD.idA3A5 = SD.idA2A2
+		and PC.Job = SUBSTRING(@pvchFunctionLocation,2,3)
+		and PC.Parent = JA.JobId
+		and JA.RoleId = UR.RoleId
+		and U.UserId = UR.UserId
+		and U.Username = @pvchUser
+		group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description
+		having Max(JA.AccessLevel) >= 1 
+
+		order by 1,2,3
+	end
+	else
+	begin
+		select DISTINCT DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description
+		from wcadmin.wcadmin.WTPart P, wcadmin.wcadmin.WTPartMaster PM, @PartTable P2,
+		wcadmin.wcadmin.WTPartReferenceLink PRL, wcadmin.wcadmin.WTDocumentMaster DM,
+		wcadmin.wcadmin.WTDocument D, wcadmin.wcadmin.HolderToContent H,
+		wcadmin.wcadmin.ApplicationData AD, wcadmin.wcadmin.StreamData SD,
+		vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U
+		where  P.idA3masterReference = PM.idA2A2
+		and PM.WTPartNumber = P2.FuncLoc collate SQL_Latin1_General_CP1_CS_AS
+		and P.latestiterationInfo = 1
+		and PRL.idA3A5 = P.idA2A2
+		and PRL.idA3B5 = DM.idA2A2
+		and DM.idA2A2 = D.idA3masterReference
+		and D.latestiterationInfo = 1
+		and D.statecheckoutInfo IN ('c/i','c/o')
+		and D.idA2A2 = H.idA3A5
+		and H.idA3B5 = AD.idA2A2
+		and AD.idA3A5 = SD.idA2A2
+		and PC.Job = SUBSTRING(@pvchFunctionLocation,2,3)
+		and PC.Parent = JA.JobId
+		and JA.RoleId = UR.RoleId
+		and U.UserId = UR.UserId
+		and U.Username = @pvchUser
+		and D.statestate not in ('OBSOLETE' COLLATE SQL_Latin1_General_CP1_CI_AS)
+		group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description
+		having Max(JA.AccessLevel) >= 1 
+
+		union all 
+		select DISTINCT DM.WTDocumentNumber as DocNumber, DM.name as Name, D.statestate as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, isnull(AD.description,'') as description
+		from wcadmin.wcadmin.WTPart P, wcadmin.wcadmin.WTPartMaster PM, @PartTable P2,
+		wcadmin.wcadmin.WTPartDescribeLink PDL, wcadmin.wcadmin.WTDocumentMaster DM,
+		wcadmin.wcadmin.WTDocument D, wcadmin.wcadmin.HolderToContent H,
+		wcadmin.wcadmin.ApplicationData AD, wcadmin.wcadmin.StreamData SD,
+		vwWindchillJobCodesParentChild PC, tblJobAccess JA, tblUserRoles UR, tblUser U
+		where  P.idA3masterReference = PM.idA2A2
+		and PM.WTPartNumber = P2.FuncLoc collate SQL_Latin1_General_CP1_CS_AS
+		and P.latestiterationInfo = 1
+		and PDL.idA3A5 = P.idA2A2
+		and PDL.idA3B5 = D.idA2A2
+		and DM.idA2A2 = D.idA3masterReference
+		and D.latestiterationInfo = 1
+		and D.statecheckoutInfo IN ('c/i','c/o')
+		and D.idA2A2 = H.idA3A5
+		and H.idA3B5 = AD.idA2A2
+		and AD.idA3A5 = SD.idA2A2
+		and PC.Job = SUBSTRING(@pvchFunctionLocation,2,3)
+		and PC.Parent = JA.JobId
+		and JA.RoleId = UR.RoleId
+		and U.UserId = UR.UserId
+		and U.Username = @pvchUser
+		and D.statestate not in ('OBSOLETE' COLLATE SQL_Latin1_General_CP1_CI_AS)
+		group by  DM.WTDocumentNumber, DM.name, D.statestate, AD.fileName, SD.idA2A2, AD.description
+		having Max(JA.AccessLevel) >= 1 
+
+		order by 1,2,3
+	end
+
+END
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillReferencedPartsFromDocument]    Script Date: 28/04/2016 11:37:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_GetWindchillReferencedPartsFromDocument] 
+	@pvchDocNumber nvarchar(50)
+AS
+BEGIN
+
+	select distinct PM.WTPartNumber as PartNumber, PM.name as PartName, DM.WTDocumentNumber as DocNUmber, DM.name as DocName
+	from wcadmin.wcadmin.WTPartMaster PM, wcadmin.wcadmin.WTPart P, wcadmin.wcadmin.WTPartReferenceLink PRL, wcadmin.wcadmin.WTDocumentMaster DM
+	where DM.WTDocumentNumber = '120TD101'
+	and PM.idA2A2 = P.idA3masterReference
+	and P.latestiterationInfo = 1
+	and PRL.idA3A5 = P.idA2A2 
+	and PRL.idA3B5 = DM.idA2A2
+
+END
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillReferencedPartsFromDocument]    Script Date: 28/04/2016 11:37:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillReferencedPartsFromDocument] 
+	@pvchDocNumber nvarchar(50)
+AS
+BEGIN
+
+	select distinct PM.WTPartNumber as PartNumber, PM.name as PartName, DM.WTDocumentNumber as DocNUmber, DM.name as DocName
+	from wcadmin.wcadmin.WTPartMaster PM, wcadmin.wcadmin.WTPart P, wcadmin.wcadmin.WTPartReferenceLink PRL, wcadmin.wcadmin.WTDocumentMaster DM
+	where DM.WTDocumentNumber = @pvchDocNumber
+	and PM.idA2A2 = P.idA3masterReference
+	and P.latestiterationInfo = 1
+	and PRL.idA3A5 = P.idA2A2 
+	and PRL.idA3B5 = DM.idA2A2
+
+END
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetWindchillDocumentAttachments]    Script Date: 29/04/2016 2:49:26 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_GetWindchillDocumentAttachments] 
+	-- Add the parameters for the stored procedure here
+	@pvchDocumentNumber nvarchar(150)
+
+
+AS
+BEGIN
+
+	declare @vchCurrentStatus nvarchar(100)
+	
+	select @vchCurrentStatus = D.statestate from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.latestiterationInfo = 1
+
+--Create a temp table for storing the attachment info
+	If OBJECT_ID('tempdb..#tmpAttach') IS NOT NULL 
+		drop table #tmpAttach
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision, 
+		    min( cast(iterationIdA2iterationInfo as int)) as IterationOnSubmit
+		into #tmpAttach
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+	 
+	group by DM.WTDocumentNumber, DM.name,AD.fileName, SD.idA2A2, 
+		   isnull(AD.description,''), AD.role, D.versionIdA2versionInfo
+
+--select * from #tmpAttach
+
+	If OBJECT_ID('tempdb..#tmpAttach2') IS NOT NULL 
+		drop table #tmpAttach2
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+	isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision
+	into #tmpAttach2
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD
+	where DM.WTDocumentNumber = '120TD101'
+	and DM.idA2A2 = D.idA3masterReference
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.latestiterationInfo = 1
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+
+	select DM.WTDocumentNumber as DocNumber, DM.name as Name, @vchCurrentStatus as Status, AD.fileName as FileName, SD.idA2A2 as AttachmentId, 
+		   isnull(AD.description,'') as FileDescription, AD.role as SecondaryRole, D.versionIdA2versionInfo as Revision, 
+		    D.iterationIdA2iterationInfo as IterationOnSubmit, D.noteiterationInfo as AttachmentComments
+	from wcadmin.wcadmin.WTDocumentMaster DM, wcadmin.wcadmin.WTDocument D,
+	wcadmin.wcadmin.HolderToContent H,
+	wcadmin.wcadmin.ApplicationData AD,
+	wcadmin.wcadmin.StreamData SD,
+	#tmpAttach T
+	where DM.WTDocumentNumber = @pvchDocumentNumber
+	and DM.idA2A2 = D.idA3masterReference
+--	and D.latestiterationInfo = 1
+	and D.statecheckoutInfo IN ('c/i','c/o')
+	and D.idA2A2 = H.idA3A5
+	and AD.idA2A2 = H.idA3B5
+	and AD.idA3A5 = SD.idA2A2
+	and AD.role in ('PRIMARY','SECONDARY')
+	and T.Revision = D.versionIdA2versionInfo
+	and T.IterationOnSubmit = D.iterationIdA2iterationInfo
+	and T.AttachmentId = SD.idA2A2
+	and SD.idA2A2 in (select AttachmentId from #tmpAttach2)
+	order by 4, 2, 3, 5
+END
+
+go
+
+
+/*****************************/
+/*  Completed BBM 29/4/2016  */
+/*****************************/
+
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteUser]    Script Date: 9/05/2016 10:28:00 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_DeleteUser] 
+	@pvchUserId nvarchar(50)
+AS
+BEGIN
+	
+	delete from tblRoles where RoleId = (select UserId from tblUser where Username = @pvchUserId)
+	delete from tblUser where Username = @pvchUserId
+END
+
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_DeleteUser]    Script Date: 9/05/2016 10:28:00 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[SP_DeleteUser] 
+	@pvchUserId nvarchar(50)
+AS
+BEGIN
+	
+	delete from tblUserRoles where UserId = (select UserId from tblUser where Username = @pvchUserId)
+	delete from tblUser where Username = @pvchUserId
+END
+
+
+
+go
+
+USE [Regain]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_GetRoles]    Script Date: 9/05/2016 1:57:56 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SP_GetRoles] 
+
+AS
+BEGIN
+
+	Select * from tblRoles where RoleId > 1 order by RoleDescription
+
+END
+
+
+go
+

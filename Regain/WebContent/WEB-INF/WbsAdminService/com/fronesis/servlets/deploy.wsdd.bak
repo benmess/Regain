@@ -1,0 +1,87 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsAdminService WSDL service -->
+
+  <service name="WbsAdmin" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://servlets.fronesis.com"/>
+      <parameter name="wsdlServiceElement" value="WbsAdminService"/>
+      <parameter name="schemaQualified" value="http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsAdmin"/>
+      <parameter name="className" value="com.fronesis.servlets.WbsAdminSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="WbsAdmin"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="setRoleInfo" qname="operNS:setRoleInfo" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:setRoleInfoReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sRoleDescription" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sRoleLongDescription" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteUser" qname="operNS:deleteUser" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:deleteUserReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDeleteUser" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getUserRoles" qname="operNS:getUserRoles" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:getUserRolesReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSelectedUser" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:bFull" xmlns:pns="http://servlets.fronesis.com" type="tns:boolean" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getRoleUsers" qname="operNS:getRoleUsers" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:getRoleUsersReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iSelectRole" xmlns:pns="http://servlets.fronesis.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:bFull" xmlns:pns="http://servlets.fronesis.com" type="tns:boolean" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="setRoleUserInfo" qname="operNS:setRoleUserInfo" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:setRoleUserInfoReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSaveString" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="setUserRoleInfo" qname="operNS:setUserRoleInfo" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:setUserRoleInfoReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSaveString" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteRoleInfo" qname="operNS:deleteRoleInfo" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:deleteRoleInfoReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iRoleId" xmlns:pns="http://servlets.fronesis.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="checkpassword" qname="operNS:checkpassword" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:checkpasswordReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUser" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sPassword" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllUsersAndRoleInfo" qname="operNS:getAllUsersAndRoleInfo" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:getAllUsersAndRoleInfoReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addUser" qname="operNS:addUser" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:addUserReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUser" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sPassword" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sEmail" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllUsersAndRoleInfo setRoleInfo deleteRoleInfo getRoleUsers addUser getUserRoles deleteUser setUserRoleInfo checkpassword setRoleUserInfo"/>
+
+  </service>
+</deployment>

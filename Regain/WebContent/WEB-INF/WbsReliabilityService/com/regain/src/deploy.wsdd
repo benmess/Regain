@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsReliabilityService WSDL service -->
+
+  <service name="WbsReliability" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+      <parameter name="wsdlServiceElement" value="WbsReliabilityService"/>
+      <parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsReliability"/>
+      <parameter name="className" value="com.regain.src.WbsReliability"/>
+      <parameter name="wsdlPortType" value="WbsReliability"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="setReliabilityEventLock" qname="operNS:setReliabilityEventLock" returnQName="retNS:setReliabilityEventLockReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUsername" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iId" type="tns:int"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iLocked" type="tns:int"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sMenu" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sExtra" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="getExistingEventCodes" qname="operNS:getExistingEventCodes" returnQName="retNS:getExistingEventCodesReturn" returnType="rtns:WBSReturn" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="getExistingActionRequestCodes" qname="operNS:getExistingActionRequestCodes" returnQName="retNS:getExistingActionRequestCodesReturn" returnType="rtns:WBSReturn" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="get_Reliability_Equipment_Codes" qname="operNS:get_Reliability_Equipment_Codes" returnQName="retNS:get_Reliability_Equipment_CodesReturn" returnType="rtns:WBSReturn" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sFilterCode" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iOperationCode" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="setReliabilityEvent" qname="operNS:setReliabilityEvent" returnQName="retNS:setReliabilityEventReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bCallFromConfirm" type="tns:boolean"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSaveString" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getActionRequest" qname="operNS:getActionRequest" returnQName="retNS:getActionRequestReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sARCode" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="setActionRequestLock" qname="operNS:setActionRequestLock" returnQName="retNS:setActionRequestLockReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUsername" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sARCode" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iLocked" type="tns:int"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sMenu" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sExtra" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getNewEventCode" qname="operNS:getNewEventCode" returnQName="retNS:getNewEventCodeReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iExistingId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="get_Plant_Sections" qname="operNS:get_Plant_Sections" returnQName="retNS:get_Plant_SectionsReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sOperation" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="getOperationCodes" qname="operNS:getOperationCodes" returnQName="retNS:getOperationCodesReturn" returnType="rtns:WBSReturn" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getActionRequestLock" qname="operNS:getActionRequestLock" returnQName="retNS:getActionRequestLockReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUsername" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sARCode" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="setActionRequest" qname="operNS:setActionRequest" returnQName="retNS:setActionRequestReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bCallFromConfirm" type="tns:boolean"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSaveString" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getReliabilityEvent" qname="operNS:getReliabilityEvent" returnQName="retNS:getReliabilityEventReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="emailActionRequestReport" qname="operNS:emailActionRequestReport" returnQName="retNS:emailActionRequestReportReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iOperationCode" type="tns:int"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sStartDate" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sEndDate" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sOperationName" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getNewActionRequestCode" qname="operNS:getNewActionRequestCode" returnQName="retNS:getNewActionRequestCodeReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iExistingId" type="tns:int"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sARExistingCode" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getReliabilityEventLock" qname="operNS:getReliabilityEventLock" returnQName="retNS:getReliabilityEventLockReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUsername" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iId" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="getExistingActionRequestCodes get_Plant_Sections setActionRequestLock setReliabilityEvent getActionRequestLock get_Reliability_Equipment_Codes getOperationCodes getExistingEventCodes getNewActionRequestCode getNewEventCode setActionRequest emailActionRequestReport setReliabilityEventLock getReliabilityEventLock getActionRequest getReliabilityEvent"/>
+
+      <typeMapping xmlns:ns="http://servlets.fronesis.com" qname="ns:WBSReturn" type="java:com.fronesis.servlets.WBSReturn" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsFileService WSDL service -->
+
+  <service name="WbsFile" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://servlets.fronesis.com"/>
+      <parameter name="wsdlServiceElement" value="WbsFileService"/>
+      <parameter name="schemaQualified" value="http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsFile"/>
+      <parameter name="className" value="com.fronesis.servlets.WbsFile"/>
+      <parameter name="wsdlPortType" value="WbsFile"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://servlets.fronesis.com" xmlns:retNS="http://servlets.fronesis.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="get_WindchillFilesFromFuncLoc" qname="operNS:get_WindchillFilesFromFuncLoc" returnQName="retNS:get_WindchillFilesFromFuncLocReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iWebApp" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sFuncLocCode" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bHistoric" type="tns:boolean"/>
+      </operation>
+      <operation xmlns:operNS="http://servlets.fronesis.com" xmlns:retNS="http://servlets.fronesis.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="get_Attachments" qname="operNS:get_Attachments" returnQName="retNS:get_AttachmentsReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iRelatedTableUniqueId" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iAttachmentType" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://servlets.fronesis.com" xmlns:retNS="http://servlets.fronesis.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="download_File" qname="operNS:download_File" returnQName="retNS:download_FileReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iId" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sFilename" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://servlets.fronesis.com" xmlns:retNS="http://servlets.fronesis.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="update_Attachment" qname="operNS:update_Attachment" returnQName="retNS:update_AttachmentReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iId" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iRelatedTableUniqueId" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iAttachmentType" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iCounter" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sDescription" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sComments" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sFilename" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iDeleted" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iRow" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://servlets.fronesis.com" xmlns:retNS="http://servlets.fronesis.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="download_WindchillFile" qname="operNS:download_WindchillFile" returnQName="retNS:download_WindchillFileReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iWebApp" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iId" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sFilename" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://servlets.fronesis.com" xmlns:retNS="http://servlets.fronesis.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="search_WindchillFiles" qname="operNS:search_WindchillFiles" returnQName="retNS:search_WindchillFilesReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iWebApp" type="tns:int"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSearchCriteria" type="tns:string"/>
+        <parameter xmlns:pns="http://servlets.fronesis.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bHistoric" type="tns:boolean"/>
+      </operation>
+      <parameter name="allowedMethods" value="download_File update_Attachment download_WindchillFile get_Attachments search_WindchillFiles get_WindchillFilesFromFuncLoc"/>
+
+  </service>
+</deployment>

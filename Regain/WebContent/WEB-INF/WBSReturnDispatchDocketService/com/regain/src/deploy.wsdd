@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WBSReturnDispatchDocketService WSDL service -->
+
+  <service name="WBSReturnDispatchDocket" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+      <parameter name="wsdlServiceElement" value="WBSReturnDispatchDocketService"/>
+      <parameter name="schemaQualified" value="http://src.regain.com"/>
+      <parameter name="wsdlServicePort" value="WBSReturnDispatchDocket"/>
+      <parameter name="className" value="com.regain.src.WBSReturnDispatchDocket"/>
+      <parameter name="wsdlPortType" value="WBSReturnDispatchDocket"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getStatus" qname="operNS:getStatus" returnQName="retNS:getStatusReturn" returnType="rtns:boolean" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getOperationCode" qname="operNS:getOperationCode" returnQName="retNS:getOperationCodeReturn" returnType="rtns:int" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getClientCode" qname="operNS:getClientCode" returnQName="retNS:getClientCodeReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getError" qname="operNS:getError" returnQName="retNS:getErrorReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" name="setDDDetails" qname="operNS:setDDDetails" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sDDNo" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sDDDesc" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sDDDate" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sClientCode" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:iOperationCode" type="tns:int"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bNew" type="tns:boolean"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sError" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bStatus" type="tns:boolean"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getNew" qname="operNS:getNew" returnQName="retNS:getNewReturn" returnType="rtns:boolean" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDDDate" qname="operNS:getDDDate" returnQName="retNS:getDDDateReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDDNo" qname="operNS:getDDNo" returnQName="retNS:getDDNoReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDDDesc" qname="operNS:getDDDesc" returnQName="retNS:getDDDescReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="getStatus setDDDetails getError getClientCode getDDDesc getDDDate getOperationCode getDDNo getNew"/>
+
+  </service>
+</deployment>

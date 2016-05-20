@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://src.regain.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://src.regain.com" xmlns:intf="http://src.regain.com" xmlns:tns1="http://servlets.fronesis.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://src.regain.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://servlets.fronesis.com"/>
+   <element name="getMaterialTransactions">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDDNo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMaterialTransactionsResponse">
+    <complexType>
+     <sequence>
+      <element name="getMaterialTransactionsReturn" type="tns1:WBSReturnWithStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDispatchDocketDetails">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sDDNo" type="xsd:string"/>
+      <element name="bNewDD" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDispatchDocketDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="getDispatchDocketDetailsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMBAccounts">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+      <element name="sAccountNo" type="xsd:string"/>
+      <element name="sAccountDesc" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMBAccountsResponse">
+    <complexType>
+     <sequence>
+      <element name="getMBAccountsReturn" type="tns1:WBSReturnWithStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExistingCodes">
+    <complexType>
+     <sequence>
+      <element name="sUserId" type="xsd:string"/>
+      <element name="sSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getExistingCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getExistingCodesReturn" type="tns1:WBSReturn"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://servlets.fronesis.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="WBSReturnWithStatus">
+    <sequence>
+     <element name="gridcols" type="xsd:int"/>
+     <element name="gridrows" type="xsd:int"/>
+     <element name="gridstring" nillable="true" type="xsd:string"/>
+     <element name="status" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="WBSReturn">
+    <sequence>
+     <element name="gridcols" type="xsd:int"/>
+     <element name="gridrows" type="xsd:int"/>
+     <element name="gridstring" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getMaterialTransactionsRequest">
+
+      <wsdl:part element="impl:getMaterialTransactions" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDispatchDocketDetailsRequest">
+
+      <wsdl:part element="impl:getDispatchDocketDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExistingCodesRequest">
+
+      <wsdl:part element="impl:getExistingCodes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExistingCodesResponse">
+
+      <wsdl:part element="impl:getExistingCodesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDispatchDocketDetailsResponse">
+
+      <wsdl:part element="impl:getDispatchDocketDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMaterialTransactionsResponse">
+
+      <wsdl:part element="impl:getMaterialTransactionsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMBAccountsResponse">
+
+      <wsdl:part element="impl:getMBAccountsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMBAccountsRequest">
+
+      <wsdl:part element="impl:getMBAccounts" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WbsDispatchDocket">
+
+      <wsdl:operation name="getMaterialTransactions">
+
+         <wsdl:input message="impl:getMaterialTransactionsRequest" name="getMaterialTransactionsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getMaterialTransactionsResponse" name="getMaterialTransactionsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDispatchDocketDetails">
+
+         <wsdl:input message="impl:getDispatchDocketDetailsRequest" name="getDispatchDocketDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDispatchDocketDetailsResponse" name="getDispatchDocketDetailsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMBAccounts">
+
+         <wsdl:input message="impl:getMBAccountsRequest" name="getMBAccountsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getMBAccountsResponse" name="getMBAccountsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExistingCodes">
+
+         <wsdl:input message="impl:getExistingCodesRequest" name="getExistingCodesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getExistingCodesResponse" name="getExistingCodesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WbsDispatchDocketSoapBinding" type="impl:WbsDispatchDocket">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getMaterialTransactions">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMaterialTransactionsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMaterialTransactionsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDispatchDocketDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDispatchDocketDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDispatchDocketDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMBAccounts">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMBAccountsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMBAccountsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExistingCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getExistingCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getExistingCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WbsDispatchDocketService">
+
+      <wsdl:port binding="impl:WbsDispatchDocketSoapBinding" name="WbsDispatchDocket">
+
+         <wsdlsoap:address location="http://localhost:8080/Regain/services/WbsDispatchDocket"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

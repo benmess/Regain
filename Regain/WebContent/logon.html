@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<HTML>
+<title>Regain Logon</title>
+<H1>Regain Logon</H1>
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="Shared/Common.js"></script>
+<script type="text/javascript" src="Shared/soapclient.js"></script>
+<script>
+
+function SendPassword()
+{
+	var url = GetWebServiceRoot(2) + "WbsUser";
+    var sUser = GetObjectValue('username');
+    if(sUser == '')
+   	{
+		alert('Please supply the user in the box above');   	
+   	}
+    else
+   	{
+    	var parameters = new SOAPClientParameters();
+     	parameters.add("sUsername", sUser);	 	
+     	parameters.add("iWebAppId", 2);		        
+    	SOAPClient.invoke(url,"emailPassword",parameters,true,SendPasswordSucc);   	
+   	}
+}
+
+function SendPasswordSucc(result)
+{
+	var sSuccess = result.substring(0,result.indexOf("^"));
+	var sRestOfResult = result.substring(result.indexOf("^") + 1);
+	
+	if(sSuccess == "Success")
+	{
+		alert(sRestOfResult);
+	}
+    else
+    {
+        alert(result); 
+    }
+}
+
+
+</script>
+<form method="POST" title="Regain Logon" action="SecurityCheck">
+	<table>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>Username:</td>
+						<td><input size="12" value="" id="username" name="username" maxlength="25"
+							type="text">
+						</td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input size="12" value="" name="password" maxlength="25"
+							type="password">
+							<input type="hidden" value="2" name="WebAppId">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input name="submit"
+							type="submit" value="Login"></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<a href="#" onclick="SendPassword();">Forgotten Password</a>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><label id="error_msg"
+							style="color: red"></label></td>
+					</tr>
+				</table>
+			</td>
+
+			<td style="width: 90%">
+				<div style="float: right;">
+					<img src="RegainLogo.png" align="right" style="height: 80px;">
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td style="width: 33.3%">
+				<div>
+					<img src="HomeImage1.jpg" style="height: 500px;">
+				</div>
+
+			</td>
+			<td style="width: 33.3%">
+				<div>
+					<img src="HomeImage2.jpg" style="height: 500px;">
+				</div>
+
+			</td>
+		</tr>
+	</table>
+</form>
+<script>
+LogonMsg();
+function LogonMsg()
+{
+	var sErrorMsg = UrlFullDecode(getQuerystring(window.location.href,'ErrorMsg'));
+	if(sErrorMsg != "")
+	{
+		SetObjectValue("error_msg", sErrorMsg);
+	}
+} 
+</script>
+</HTML>

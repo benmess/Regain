@@ -1,0 +1,35 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsUserService WSDL service -->
+
+  <service name="WbsUser" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://servlets.fronesis.com"/>
+      <parameter name="wsdlServiceElement" value="WbsUserService"/>
+      <parameter name="schemaQualified" value="http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsUser"/>
+      <parameter name="className" value="com.fronesis.servlets.WbsUserSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="WbsUser"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="update_User_Time" qname="operNS:update_User_Time" xmlns:operNS="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sSessionId" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sUsername" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="emailPassword" qname="operNS:emailPassword" xmlns:operNS="http://servlets.fronesis.com" returnQName="retNS:emailPasswordReturn" xmlns:retNS="http://servlets.fronesis.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUsername" xmlns:pns="http://servlets.fronesis.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iWebAppId" xmlns:pns="http://servlets.fronesis.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="emailPassword update_User_Time"/>
+
+  </service>
+</deployment>

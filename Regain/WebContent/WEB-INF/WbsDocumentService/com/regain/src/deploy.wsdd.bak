@@ -1,0 +1,93 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsDocumentService WSDL service -->
+
+  <service name="WbsDocument" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+      <parameter name="wsdlServiceElement" value="WbsDocumentService"/>
+      <parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsDocument"/>
+      <parameter name="className" value="com.regain.src.WbsDocumentSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="WbsDocument"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getFunctionalLocations" qname="operNS:getFunctionalLocations" xmlns:operNS="http://src.regain.com" returnQName="retNS:getFunctionalLocationsReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturn" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sJobNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getSearchDocs" qname="operNS:getSearchDocs" xmlns:operNS="http://src.regain.com" returnQName="retNS:getSearchDocsReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sJobNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocType" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getDocDetails" qname="operNS:getDocDetails" xmlns:operNS="http://src.regain.com" returnQName="retNS:getDocDetailsReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getDocVerification" qname="operNS:getDocVerification" xmlns:operNS="http://src.regain.com" returnQName="retNS:getDocVerificationReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getDocAttachments" qname="operNS:getDocAttachments" xmlns:operNS="http://src.regain.com" returnQName="retNS:getDocAttachmentsReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturn" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getJobAccessLevels" qname="operNS:getJobAccessLevels" xmlns:operNS="http://src.regain.com" returnQName="retNS:getJobAccessLevelsReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturn" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="setJobAccessLevels" qname="operNS:setJobAccessLevels" xmlns:operNS="http://src.regain.com" returnQName="retNS:setJobAccessLevelsReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sJobSaveString" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocTypeSaveString" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:bCallFromConfirm" xmlns:pns="http://src.regain.com" type="tns:boolean" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteWindchillAttachment" qname="operNS:deleteWindchillAttachment" xmlns:operNS="http://src.regain.com" returnQName="retNS:deleteWindchillAttachmentReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocNo" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iAttachmentId" xmlns:pns="http://src.regain.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getDocTypes" qname="operNS:getDocTypes" xmlns:operNS="http://src.regain.com" returnQName="retNS:getDocTypesReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturn" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getJobCodes" qname="operNS:getJobCodes" xmlns:operNS="http://src.regain.com" returnQName="retNS:getJobCodesReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturn" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSearchCriteria" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="setWindchillDocument" qname="operNS:setWindchillDocument" xmlns:operNS="http://src.regain.com" returnQName="retNS:setWindchillDocumentReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:bCallFromConfirm" xmlns:pns="http://src.regain.com" type="tns:boolean" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDocDetailsString" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getFunctionalLocations getJobAccessLevels setJobAccessLevels getDocAttachments getJobCodes setWindchillDocument getDocVerification getSearchDocs deleteWindchillAttachment getDocTypes getDocDetails"/>
+
+      <typeMapping
+        xmlns:ns="http://servlets.fronesis.com"
+        qname="ns:WBSReturn"
+        type="java:com.fronesis.servlets.WBSReturn"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

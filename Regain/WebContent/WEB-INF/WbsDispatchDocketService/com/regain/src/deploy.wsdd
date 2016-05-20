@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsDispatchDocketService WSDL service -->
+
+  <service name="WbsDispatchDocket" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+      <parameter name="wsdlServiceElement" value="WbsDispatchDocketService"/>
+      <parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsDispatchDocket"/>
+      <parameter name="className" value="com.regain.src.WbsDispatchDocket"/>
+      <parameter name="wsdlPortType" value="WbsDispatchDocket"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="getMaterialTransactions" qname="operNS:getMaterialTransactions" returnQName="retNS:getMaterialTransactionsReturn" returnType="rtns:WBSReturnWithStatus" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sDDNo" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDispatchDocketDetails" qname="operNS:getDispatchDocketDetails" returnQName="retNS:getDispatchDocketDetailsReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sDDNo" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bNewDD" type="tns:boolean"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="getMBAccounts" qname="operNS:getMBAccounts" returnQName="retNS:getMBAccountsReturn" returnType="rtns:WBSReturnWithStatus" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sAccountNo" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sAccountDesc" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://src.regain.com" xmlns:retNS="http://src.regain.com" xmlns:rtns="http://servlets.fronesis.com" name="getExistingCodes" qname="operNS:getExistingCodes" returnQName="retNS:getExistingCodesReturn" returnType="rtns:WBSReturn" soapAction="">
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sUserId" type="tns:string"/>
+        <parameter xmlns:pns="http://src.regain.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sSessionId" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getExistingCodes getMaterialTransactions getMBAccounts getDispatchDocketDetails"/>
+
+      <typeMapping xmlns:ns="http://servlets.fronesis.com" qname="ns:WBSReturnWithStatus" type="java:com.fronesis.servlets.WBSReturnWithStatus" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://servlets.fronesis.com" qname="ns:WBSReturn" type="java:com.fronesis.servlets.WBSReturn" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

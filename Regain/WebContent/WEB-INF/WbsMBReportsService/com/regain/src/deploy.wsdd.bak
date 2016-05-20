@@ -1,0 +1,63 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WbsMBReportsService WSDL service -->
+
+  <service name="WbsMBReports" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://src.regain.com"/>
+      <parameter name="wsdlServiceElement" value="WbsMBReportsService"/>
+      <parameter name="schemaQualified" value="http://src.regain.com,http://servlets.fronesis.com"/>
+      <parameter name="wsdlServicePort" value="WbsMBReports"/>
+      <parameter name="className" value="com.regain.src.WbsMBReportsSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="WbsMBReports"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="get_Report_pdf" qname="operNS:get_Report_pdf" xmlns:operNS="http://src.regain.com" returnQName="retNS:get_Report_pdfReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturnWithExtra" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iReport" xmlns:pns="http://src.regain.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iMBOperationCodeStart" xmlns:pns="http://src.regain.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iMBOperationCodeEnd" xmlns:pns="http://src.regain.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sMBAccountTypeCodeStart" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sMBAccountTypeCodeEnd" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sMBAccountCodeStart" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sMBAccountCodeEnd" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iDDOperationCodeStart" xmlns:pns="http://src.regain.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:iDDOperationCodeEnd" xmlns:pns="http://src.regain.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDDDateStart" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDDDateEnd" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDDNumberStart" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sDDNumberEnd" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getReportTypes" qname="operNS:getReportTypes" xmlns:operNS="http://src.regain.com" returnQName="retNS:getReportTypesReturn" xmlns:retNS="http://src.regain.com" returnType="rtns:WBSReturn" xmlns:rtns="http://servlets.fronesis.com" soapAction="" >
+        <parameter qname="pns:sUserId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:sSessionId" xmlns:pns="http://src.regain.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="get_Report_pdf getReportTypes"/>
+
+      <typeMapping
+        xmlns:ns="http://servlets.fronesis.com"
+        qname="ns:WBSReturnWithExtra"
+        type="java:com.fronesis.servlets.WBSReturnWithExtra"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://servlets.fronesis.com"
+        qname="ns:WBSReturn"
+        type="java:com.fronesis.servlets.WBSReturn"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
